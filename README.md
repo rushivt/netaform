@@ -28,7 +28,7 @@ _More phases coming — follow the journey._
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/netaform.git
+git clone https://github.com/rushivt/netaform.git
 cd netaform/phase-01-branch-office
 
 # Deploy the lab

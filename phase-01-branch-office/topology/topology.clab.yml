@@ -6,23 +6,23 @@ topology:
       kind: linux
       image: frrouting/frr:latest
       binds:
-        - configs/isp-rtr/frr.conf:/etc/frr/frr.conf
-        - configs/isp-rtr/daemons:/etc/frr/daemons
+        - ../configs/isp-rtr/frr.conf:/etc/frr/frr.conf
+        - ../configs/isp-rtr/daemons:/etc/frr/daemons
 
     edge-1:
       kind: ceos
-      image: ceos:4.35.2F
-      startup-config: configs/edge-1/startup-config
+      image: ceos:4.35.1F
+      startup-config: ../configs/edge-1/startup-config
 
     dist-1:
       kind: ceos
-      image: ceos:4.35.2F
-      startup-config: configs/dist-1/startup-config
+      image: ceos:4.35.1F
+      startup-config: ../configs/dist-1/startup-config
 
     dist-2:
       kind: ceos
-      image: ceos:4.35.2F
-      startup-config: configs/dist-2/startup-config
+      image: ceos:4.35.1F
+      startup-config: ../configs/dist-2/startup-config
 
     host-eng:
       kind: linux
