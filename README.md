@@ -2,27 +2,44 @@
   <img src="netaform-logo.png" alt="Netaform Logo" width="600">
 </p>
 
-# Netaform - Network Automation, Endlessly Evolving
+# Netaform — Network Automation, Endlessly Evolving
 
 A public, evolving network automation portfolio built on [Containerlab](https://containerlab.dev). Each phase introduces a realistic network scenario and layers in new tools.
 
 ## Phases
 
-| Phase | Scenario                                            | Key Tools               | Status         |
-| ----- | --------------------------------------------------- | ----------------------- | -------------- |
-| 1     | [Enterprise Branch Office](phase-01-branch-office/) | Containerlab, cEOS, FRR | 🔧 In Progress |
+| Phase | Scenario                                            | Key Tools               | Status      |
+| ----- | --------------------------------------------------- | ----------------------- | ----------- |
+| 1     | [Enterprise Branch Office](phase-01-branch-office/) | Containerlab, cEOS, FRR | 🟢 Complete |
 
 _More phases coming — follow the journey._
+
+## Interview with Bitt
+
+<table>
+<tr>
+<td width="120" align="center">
+<img src="bitt.png" alt="Bitt" width="100">
+</td>
+<td>
+Too many tools? Too much jargon? Don't worry — <strong>Bitt</strong> has you covered. Bitt is a panda who lives inside the network (don't ask how, it's a long story) and explains everything in plain language. No textbook definitions. No assumptions. Just honest answers with a side of humor.
+<br><br>
+📖 <a href="docs/conversations/what-is-netaform.md">Bitt explains what Netaform is all about</a>
+</td>
+</tr>
+</table>
 
 ## Getting Started
 
 ### Prerequisites
 
-- Linux (Ubuntu recommended) or macOS with [OrbStack](https://orbstack.dev)
-- [Docker](https://docs.docker.com/engine/install/)
-- [Containerlab](https://containerlab.dev/install/)
-- Arista cEOS image (free with [Arista account](https://www.arista.com/en/user-registration))
-- 8GB+ RAM recommended
+| Tool         | Purpose                                                      | Setup                                                                                                                                                                                                               |
+| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Linux VM     | Containerlab requires Linux                                  | macOS users: install [OrbStack](https://orbstack.dev) and create an Ubuntu VM with `orb create ubuntu`                                                                                                              |
+| Docker       | Container runtime for all network nodes                      | Inside your Linux VM: `sudo apt update && sudo apt install -y docker.io`                                                                                                                                            |
+| Containerlab | Topology orchestration — deploys and wires up all containers | `sudo bash -c "$(curl -sL https://get.containerlab.dev)"`                                                                                                                                                           |
+| Arista cEOS  | Network OS for switches and routers                          | Free download from [Arista](https://www.arista.com/en/support/software-download) — requires account. Apple Silicon users: download **cEOSarm-lab**, not cEOS-lab. Import with `docker import <file> ceos:<version>` |
+| Git          | Version control                                              | `sudo apt install -y git`                                                                                                                                                                                           |
 
 ### Quick Start
 
