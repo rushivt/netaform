@@ -1,0 +1,45 @@
+hostname dist-1
+!
+vlan 10
+   name Engineering
+!
+vlan 20
+   name Sales
+!
+vlan 30
+   name Servers
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.2/30
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.1.9/30
+!
+interface Ethernet3
+   switchport access vlan 10
+!
+interface Loopback0
+   ip address 10.0.255.11/32
+!
+interface Vlan10
+   ip address 10.0.10.2/24
+!
+interface Vlan20
+   ip address 10.0.20.2/24
+!
+interface Vlan30
+   ip address 10.0.30.2/24
+!
+ip routing
+!
+router ospf 1
+   router-id 10.0.255.11
+   network 10.0.1.0/30 area 0
+   network 10.0.1.8/30 area 0
+   network 10.0.10.0/24 area 0
+   network 10.0.20.0/24 area 0
+   network 10.0.30.0/24 area 0
+   network 10.0.255.11/32 area 0
+!

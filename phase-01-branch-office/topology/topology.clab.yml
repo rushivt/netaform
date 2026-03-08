@@ -1,0 +1,68 @@
+name: branch-office
+
+topology:
+  nodes:
+    isp-rtr:
+      kind: linux
+      image: frrouting/frr:latest
+      binds:
+        - configs/isp-rtr/frr.conf:/etc/frr/frr.conf
+        - configs/isp-rtr/daemons:/etc/frr/daemons
+
+    edge-1:
+      kind: ceos
+      image: ceos:4.35.2F
+      startup-config: configs/edge-1/startup-config
+
+    dist-1:
+      kind: ceos
+      image: ceos:4.35.2F
+      startup-config: configs/dist-1/startup-config
+
+    dist-2:
+      kind: ceos
+      image: ceos:4.35.2F
+      startup-config: configs/dist-2/startup-config
+
+    host-eng:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 10.0.10.100/24 dev eth1
+        - ip route replace default via 10.0.10.2
+
+    host-sales:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 10.0.20.100/24 dev eth1
+        - ip route replace default via 10.0.20.3
+
+    host-server:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 10.0.30.100/24 dev eth1
+        - ip route replace default via 10.0.30.3
+
+  links:
+    # ISP-RTR to EDGE-1 (eBGP peering)
+    - endpoints: ["isp-rtr:eth1", "edge-1:eth1"]
+
+    # EDGE-1 to DIST-1 (OSPF)
+    - endpoints: ["edge-1:eth2", "dist-1:eth1"]
+
+    # EDGE-1 to DIST-2 (OSPF)
+    - endpoints: ["edge-1:eth3", "dist-2:eth1"]
+
+    # DIST-1 to DIST-2 (Inter-switch link)
+    - endpoints: ["dist-1:eth2", "dist-2:eth2"]
+
+    # HOST-ENG to DIST-1
+    - endpoints: ["host-eng:eth1", "dist-1:eth3"]
+
+    # HOST-SALES to DIST-2
+    - endpoints: ["host-sales:eth1", "dist-2:eth3"]
+
+    # HOST-SERVER to DIST-2
+    - endpoints: ["host-server:eth1", "dist-2:eth4"]

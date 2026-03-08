@@ -1,0 +1,11 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Containerlab
+*.bak
+clab-*/
+
+# IDE
+.vscode/
+.idea/
