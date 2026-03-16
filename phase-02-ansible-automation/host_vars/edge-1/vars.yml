@@ -1,0 +1,42 @@
+hostname: edge-1
+router_id: 10.0.255.10
+
+interfaces:
+  loopback0:
+    ip: 10.0.255.10/32
+
+  ethernet1:
+    description: "Link to ISP-RTR"
+    mode: routed
+    ip: 203.0.113.2/30
+
+  ethernet2:
+    description: "Link to DIST-1"
+    mode: routed
+    ip: 10.0.1.1/30
+
+  ethernet3:
+    description: "Link to DIST-2"
+    mode: routed
+    ip: 10.0.1.5/30
+
+ospf:
+  process_id: 1
+  router_id: 10.0.255.10
+  networks:
+    - network: 10.0.1.0/30
+      area: 0
+    - network: 10.0.1.4/30
+      area: 0
+    - network: 10.0.255.10/32
+      area: 0
+  default_information_originate: true
+
+bgp:
+  local_as: 65001
+  router_id: 10.0.255.10
+  neighbors:
+    - ip: 203.0.113.1
+      remote_as: 65000
+  redistribute:
+    - ospf

@@ -1,0 +1,6 @@
+---
+- name: Generate and apply base configuration
+  arista.eos.eos_config:
+    src: base.j2
+  tags:
+    - base

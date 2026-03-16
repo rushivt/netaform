@@ -8,9 +8,10 @@ A public, evolving network automation portfolio built on [Containerlab](https://
 
 ## Phases
 
-| Phase | Scenario                                            | Key Tools               | Status      |
-| ----- | --------------------------------------------------- | ----------------------- | ----------- |
-| 1     | [Enterprise Branch Office](phase-01-branch-office/) | Containerlab, cEOS, FRR | 🟢 Complete |
+| Phase | Scenario                                                           | Key Tools               | Status      |
+| ----- | ------------------------------------------------------------------ | ----------------------- | ----------- |
+| 1     | [Enterprise Branch Office](phase-01-branch-office/)                | Containerlab, cEOS, FRR | 🟢 Complete |
+| 2     | [Automating the Branch with Ansible](phase-02-ansible-automation/) | Ansible, Jinja2, Make   | 🟢 Complete |
 
 _More phases coming — follow the journey._
 
@@ -40,6 +41,7 @@ Too many tools? Too much jargon? Don't worry — <strong>Bitt</strong> has you c
 | Containerlab | Topology orchestration — deploys and wires up all containers | `sudo bash -c "$(curl -sL https://get.containerlab.dev)"`                                                                                                                                                           |
 | Arista cEOS  | Network OS for switches and routers                          | Free download from [Arista](https://www.arista.com/en/support/software-download) — requires account. Apple Silicon users: download **cEOSarm-lab**, not cEOS-lab. Import with `docker import <file> ceos:<version>` |
 | Git          | Version control                                              | `sudo apt install -y git`                                                                                                                                                                                           |
+| Ansible      | Network automation and configuration management              | `pip3 install ansible`                                                                                                                                                                                              |
 
 ### Quick Start
 

@@ -1,0 +1,7 @@
+hostname: host-eng
+container_name: clab-branch-office-host-eng
+
+network:
+  interface: eth1
+  ip: 10.0.10.100/24
+  gateway: 10.0.10.2

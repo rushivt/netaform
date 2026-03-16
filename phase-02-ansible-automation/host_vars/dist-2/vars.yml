@@ -1,0 +1,60 @@
+hostname: dist-2
+router_id: 10.0.255.12
+
+vlans:
+  - id: 10
+    name: Engineering
+  - id: 20
+    name: Sales
+  - id: 30
+    name: Servers
+
+interfaces:
+  loopback0:
+    ip: 10.0.255.12/32
+
+  ethernet1:
+    description: "Link to EDGE-1"
+    mode: routed
+    ip: 10.0.1.6/30
+
+  ethernet2:
+    description: "Link to DIST-1"
+    mode: routed
+    ip: 10.0.1.10/30
+
+  ethernet3:
+    description: "Host-SALES access port"
+    mode: access
+    vlan: 20
+
+  ethernet4:
+    description: "Host-SERVER access port"
+    mode: access
+    vlan: 30
+
+  vlan10:
+    ip: 10.0.10.3/24
+
+  vlan20:
+    ip: 10.0.20.3/24
+
+  vlan30:
+    ip: 10.0.30.3/24
+
+ospf:
+  process_id: 1
+  router_id: 10.0.255.12
+  networks:
+    - network: 10.0.1.4/30
+      area: 0
+    - network: 10.0.1.8/30
+      area: 0
+    - network: 10.0.10.0/24
+      area: 0
+    - network: 10.0.20.0/24
+      area: 0
+    - network: 10.0.30.0/24
+      area: 0
+    - network: 10.0.255.12/32
+      area: 0

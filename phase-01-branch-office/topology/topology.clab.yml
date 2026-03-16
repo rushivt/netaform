@@ -27,23 +27,14 @@ topology:
     host-eng:
       kind: linux
       image: alpine:latest
-      exec:
-        - ip addr add 10.0.10.100/24 dev eth1
-        - ip route replace default via 10.0.10.2
 
     host-sales:
       kind: linux
       image: alpine:latest
-      exec:
-        - ip addr add 10.0.20.100/24 dev eth1
-        - ip route replace default via 10.0.20.3
 
     host-server:
       kind: linux
       image: alpine:latest
-      exec:
-        - ip addr add 10.0.30.100/24 dev eth1
-        - ip route replace default via 10.0.30.3
 
   links:
     # ISP-RTR to EDGE-1 (eBGP peering)
