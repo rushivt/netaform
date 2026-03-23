@@ -12,8 +12,7 @@ A public, evolving network automation portfolio built on [Containerlab](https://
 | ----- | ------------------------------------------------------------------ | ----------------------- | ----------- |
 | 1     | [Enterprise Branch Office](phase-01-branch-office/)                | Containerlab, cEOS, FRR | 🟢 Complete |
 | 2     | [Automating the Branch with Ansible](phase-02-ansible-automation/) | Ansible, Jinja2, Make   | 🟢 Complete |
-
-| 3     | [Network Programmability — NETCONF](phase-03-programmability/)       | Python, ncclient, pyang | 🟢 Complete |
+| 3     | [Network Programmability — NETCONF](phase-03-programmability/)     | Python, ncclient, pyang | 🟢 Complete |
 
 _More phases coming — follow the journey._
 
