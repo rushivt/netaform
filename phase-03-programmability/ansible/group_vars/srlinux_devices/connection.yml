@@ -1,0 +1,7 @@
+ansible_network_os: nokia.srlinux.srlinux
+ansible_connection: ansible.netcommon.httpapi
+ansible_httpapi_use_ssl: false
+ansible_httpapi_port: 80
+ansible_httpapi_validate_certs: false
+ansible_user: admin
+ansible_password: NokiaSrl1!

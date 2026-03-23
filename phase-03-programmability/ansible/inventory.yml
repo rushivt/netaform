@@ -1,0 +1,26 @@
+all:
+  children:
+    eos_devices:
+      hosts:
+        edge-1:
+          ansible_host: clab-branch-office-edge-1
+        dist-1:
+          ansible_host: clab-branch-office-dist-1
+        dist-2:
+          ansible_host: clab-branch-office-dist-2
+
+    srlinux_devices:
+      hosts:
+        dist-3:
+          ansible_host: clab-branch-office-dist-3
+
+    lab_hosts:
+      hosts:
+        host-eng:
+          ansible_host: clab-branch-office-host-eng
+        host-sales:
+          ansible_host: clab-branch-office-host-sales
+        host-server:
+          ansible_host: clab-branch-office-host-server
+        host-devops:
+          ansible_host: clab-branch-office-host-devops

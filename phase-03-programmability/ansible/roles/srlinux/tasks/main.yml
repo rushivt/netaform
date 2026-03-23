@@ -1,0 +1,145 @@
+---
+- name: Configure hostname
+  nokia.srlinux.config:
+    datastore: candidate
+    save_when: changed
+    update:
+      - path: /system/name/host-name
+        value: "{{ hostname }}"
+  tags:
+    - base
+
+- name: Configure loopback (system0) interface
+  nokia.srlinux.config:
+    datastore: candidate
+    save_when: changed
+    update:
+      - path: /interface[name={{ loopback.name }}]/admin-state
+        value: enable
+      - path: /interface[name={{ loopback.name }}]/subinterface[index=0]/admin-state
+        value: enable
+      - path: /interface[name={{ loopback.name }}]/subinterface[index=0]/ipv4/admin-state
+        value: enable
+      - path: /interface[name={{ loopback.name }}]/subinterface[index=0]/ipv4/address[ip-prefix={{ loopback.ipv4_address }}]
+        value: {}
+  tags:
+    - interfaces
+
+- name: Configure routed interfaces
+  nokia.srlinux.config:
+    datastore: candidate
+    save_when: changed
+    update:
+      - path: /interface[name={{ item.name }}]/admin-state
+        value: enable
+      - path: /interface[name={{ item.name }}]/description
+        value: "{{ item.description }}"
+      - path: /interface[name={{ item.name }}]/subinterface[index=0]/admin-state
+        value: enable
+      - path: /interface[name={{ item.name }}]/subinterface[index=0]/ipv4/admin-state
+        value: enable
+      - path: /interface[name={{ item.name }}]/subinterface[index=0]/ipv4/address[ip-prefix={{ item.ipv4_address }}]
+        value: {}
+  loop: "{{ routed_interfaces }}"
+  tags:
+    - interfaces
+
+- name: Configure IRB interface
+  nokia.srlinux.config:
+    datastore: candidate
+    save_when: changed
+    update:
+      - path: /interface[name=irb0]/admin-state
+        value: enable
+      - path: /interface[name=irb0]/subinterface[index={{ item.subinterface }}]/admin-state
+        value: enable
+      - path: /interface[name=irb0]/subinterface[index={{ item.subinterface }}]/ipv4/admin-state
+        value: enable
+      - path: /interface[name=irb0]/subinterface[index={{ item.subinterface }}]/ipv4/address[ip-prefix={{ item.ipv4_address }}]
+        value: {}
+  loop: "{{ irb_interfaces }}"
+  tags:
+    - interfaces
+
+- name: Configure access interface
+  nokia.srlinux.config:
+    datastore: candidate
+    save_when: changed
+    update:
+      - path: /interface[name={{ item.name }}]/admin-state
+        value: enable
+      - path: /interface[name={{ item.name }}]/description
+        value: "{{ item.description }}"
+      - path: /interface[name={{ item.name }}]/subinterface[index=0]/admin-state
+        value: enable
+      - path: /interface[name={{ item.name }}]/subinterface[index=0]/type
+        value: bridged
+  loop: "{{ access_interfaces }}"
+  tags:
+    - interfaces
+
+- name: Configure MAC-VRF network instances for VLANs
+  nokia.srlinux.config:
+    datastore: candidate
+    save_when: changed
+    update:
+      - path: /network-instance[name=vlan{{ item.id }}]/type
+        value: mac-vrf
+      - path: /network-instance[name=vlan{{ item.id }}]/admin-state
+        value: enable
+      - path: /network-instance[name=vlan{{ item.id }}]/interface[name=irb0.{{ item.id }}]
+        value: {}
+  loop: "{{ vlans }}"
+  tags:
+    - interfaces
+
+- name: Bind access interface to MAC-VRF
+  nokia.srlinux.config:
+    datastore: candidate
+    save_when: changed
+    update:
+      - path: /network-instance[name=vlan{{ item.vlan_id }}]/interface[name={{ item.name }}.0]
+        value: {}
+  loop: "{{ access_interfaces }}"
+  tags:
+    - interfaces
+
+- name: Configure default network instance with routed interfaces and loopback
+  nokia.srlinux.config:
+    datastore: candidate
+    save_when: changed
+    update: >-
+      [
+        {"path": "/network-instance[name=default]/admin-state", "value": "enable"},
+        {"path": "/network-instance[name=default]/router-id", "value": "{{ router_id }}"},
+        {"path": "/network-instance[name=default]/interface[name=system0.0]", "value": {}},
+        {% for iface in routed_interfaces %}
+        {"path": "/network-instance[name=default]/interface[name={{ iface.name }}.0]", "value": {}},
+        {% endfor %}
+        {% for irb in irb_interfaces %}
+        {"path": "/network-instance[name=default]/interface[name=irb0.{{ irb.subinterface }}]", "value": {}},
+        {% endfor %}
+        {"path": "/network-instance[name=default]/protocols/ospf/instance[name={{ ospf.instance_name }}]/admin-state", "value": "enable"},
+        {"path": "/network-instance[name=default]/protocols/ospf/instance[name={{ ospf.instance_name }}]/version", "value": "{{ ospf.version }}"},
+        {"path": "/network-instance[name=default]/protocols/ospf/instance[name={{ ospf.instance_name }}]/router-id", "value": "{{ ospf.router_id }}"},
+        {% for intf in ospf.interfaces %}
+        {"path": "/network-instance[name=default]/protocols/ospf/instance[name={{ ospf.instance_name }}]/area[area-id={{ ospf.area }}]/interface[interface-name={{ intf }}]", "value": {}}{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+  tags:
+    - routing
+
+- name: Validate SR Linux config
+  nokia.srlinux.get:
+    paths:
+      - path: /network-instance[name=default]/protocols/ospf
+        datastore: state
+  register: srl_ospf
+  tags:
+    - validate
+
+- name: Display SR Linux OSPF state
+  ansible.builtin.debug:
+    var: srl_ospf.result
+  tags:
+    - validate

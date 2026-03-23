@@ -1,0 +1,13 @@
+---
+- name: Configure VLANs
+  arista.eos.eos_config:
+    src: vlans.j2
+  tags:
+    - interfaces
+    - vlans
+
+- name: Configure interfaces
+  arista.eos.eos_config:
+    src: interfaces.j2
+  tags:
+    - interfaces

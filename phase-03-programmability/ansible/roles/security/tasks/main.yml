@@ -1,0 +1,6 @@
+---
+- name: Apply security hardening
+  arista.eos.eos_config:
+    src: security.j2
+  tags:
+    - security

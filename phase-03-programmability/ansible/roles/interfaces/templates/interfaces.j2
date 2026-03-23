@@ -1,0 +1,25 @@
+ip routing
+!
+{% for name, intf in interfaces.items() %}
+{% if name.startswith('loopback') %}
+interface Loopback{{ name | replace('loopback', '') }}
+  ip address {{ intf.ip }}
+!
+{% elif name.startswith('vlan') %}
+interface Vlan{{ name | replace('vlan', '') }}
+  ip address {{ intf.ip }}
+!
+{% elif name.startswith('ethernet') %}
+interface Ethernet{{ name | replace('ethernet', '') }}
+{% if intf.description is defined %}
+  description {{ intf.description }}
+{% endif %}
+{% if intf.mode == 'routed' %}
+  no switchport
+  ip address {{ intf.ip }}
+{% elif intf.mode == 'access' %}
+  switchport access vlan {{ intf.vlan }}
+{% endif %}
+!
+{% endif %}
+{% endfor %}

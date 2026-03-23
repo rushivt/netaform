@@ -1,6 +1,6 @@
-.PHONY: deploy destroy inspect bootstrap network hosts all validate clean
+.PHONY: deploy destroy bootstrap network srlinux hosts all validate clean
 
-LAB_TOPOLOGY := ../phase-01-branch-office/topology/topology.clab.yml
+LAB_TOPOLOGY := ../topology/topology.clab.yml
 
 deploy:
 	sudo containerlab deploy -t $(LAB_TOPOLOGY)
@@ -17,13 +17,16 @@ bootstrap:
 network:
 	ansible-playbook network.yml
 
+srlinux:
+	ansible-playbook srlinux.yml
+
 hosts:
 	ansible-playbook hosts.yml
 
 validate:
 	ansible-playbook network.yml --tags validate
 
-all: bootstrap network hosts
+all: bootstrap network srlinux hosts
 	@echo "Full deployment complete."
 
 clean: destroy

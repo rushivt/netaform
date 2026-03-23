@@ -1,0 +1,28 @@
+{% if ospf is defined %}
+router ospf {{ ospf.process_id }}
+  router-id {{ ospf.router_id }}
+{% for network in ospf.networks %}
+  network {{ network.network }} area {{ network.area }}
+{% endfor %}
+{% if ospf.default_information_originate is defined and ospf.default_information_originate %}
+  default-information originate
+{% endif %}
+!
+{% endif %}
+{% if bgp is defined %}
+router bgp {{ bgp.local_as }}
+  router-id {{ bgp.router_id }}
+{% for neighbor in bgp.neighbors %}
+  neighbor {{ neighbor.ip }} remote-as {{ neighbor.remote_as }}
+{% endfor %}
+  !
+  address-family ipv4
+{% for neighbor in bgp.neighbors %}
+    neighbor {{ neighbor.ip }} activate
+{% endfor %}
+{% if bgp.redistribute is defined %}
+{% for protocol in bgp.redistribute %}
+    redistribute {{ protocol }}
+{% endfor %}
+{% endif %}
+{% endif %}

@@ -1,0 +1,6 @@
+---
+- name: Configure dist-3 Nokia SR Linux
+  hosts: srlinux_devices
+  gather_facts: false
+  roles:
+    - srlinux

@@ -1,0 +1,6 @@
+---
+- name: Configure routing protocols
+  arista.eos.eos_config:
+    src: routing.j2
+  tags:
+    - routing

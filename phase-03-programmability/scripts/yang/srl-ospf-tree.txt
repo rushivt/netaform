@@ -1,0 +1,649 @@
+module: srl_nokia-ospf
+
+  augment /srl_nokia-netinst:network-instance/srl_nokia-netinst:protocols:
+    +--rw ospf!
+       +--rw instance* [name]
+          +--rw name                           srl_nokia-comm:name
+          +--rw admin-state?                   srl_nokia-comm:admin-state
+          +--rw version                        identityref
+          +--rw address-family?                identityref
+          +--rw instance-id?                   uint32
+          +--rw router-id?                     yang:dotted-quad
+          +--rw max-ecmp-paths?                srl_nokia-ospf-types:ospf-ecmp
+          +--rw advertise-router-capability?   enumeration
+          +--rw export-policy?                 -> /srl-rpol:routing-policy/policy/name
+          +--rw asbr!
+          |  +--rw trace-path?   union
+          +--rw export-limit!
+          |  +--rw number         uint32
+          |  +--rw log-percent?   uint32
+          +--rw external-preference?           uint8
+          +--rw external-db-overflow!
+          |  +--rw interval?   uint32
+          |  +--rw limit?      uint32
+          +--rw graceful-restart
+          |  +--rw helper-mode?           boolean
+          |  +--rw strict-lsa-checking?   boolean
+          +--rw reference-bandwidth?           uint64
+          +--rw preference?                    uint8
+          +--rw overload
+          |  +--rw active?                   boolean
+          |  +--rw overload-include-ext-1?   boolean
+          |  +--rw overload-include-ext-2?   boolean
+          |  +--rw overload-include-stub?    boolean
+          |  +--rw overload-on-boot!
+          |  |  +--rw timeout?   uint32
+          |  +--rw rtr-adv-lsa-limit
+          |     +--rw log-only?            boolean
+          |     +--rw max-lsa-count?       uint32
+          |     +--rw overload-timeout?    uint16
+          |     +--rw warning-threshold?   srl_nokia-comm:percentage
+          +--rw timers
+          |  +--rw incremental-spf-wait?   uint32
+          |  +--rw lsa-accumulate?         uint32
+          |  +--rw lsa-arrival?            uint32
+          |  +--rw redistribute-delay?     uint32
+          |  +--rw lsa-generate
+          |  |  +--rw max-lsa-wait?       uint32
+          |  |  +--rw lsa-initial-wait?   uint32
+          |  |  +--rw lsa-second-wait?    uint32
+          |  +--rw spf-wait
+          |     +--rw spf-max-wait?       uint32
+          |     +--rw spf-initial-wait?   uint32
+          |     +--rw spf-second-wait?    uint32
+          +--rw trace-options
+          |  +--rw trace
+          |     +--rw adjacencies?        empty
+          |     +--rw graceful-restart?   empty
+          |     +--rw interfaces?         empty
+          |     +--rw spf!
+          |     |  +--rw dest-address?   srl_nokia-comm:ip-address
+          |     +--rw routes!
+          |     |  +--rw dest-address?   srl_nokia-comm:ip-address
+          |     +--rw misc?               empty
+          |     +--rw packet!
+          |     |  +--rw type?       enumeration
+          |     |  +--rw modifier?   enumeration
+          |     |  +--rw detail?     empty
+          |     +--rw lsdb!
+          |        +--rw type?            enumeration
+          |        +--rw router-id?       srl_nokia-comm:ipv4-address
+          |        +--rw link-state-id?   srl_nokia-comm:ipv4-address
+          +--rw te-database-install! {srl-feat:traffic-engineering-ospf}?
+          |  +--rw bgp-ls! {srl-feat:traffic-engineering-bgpls}?
+          |     +--rw igp-identifier?   uint64
+          +--rw traffic-engineering {srl-feat:traffic-engineering-ospf}?
+          |  +--rw advertisement?   boolean {srl-feat:traffic-engineering-ospf}?
+          +--ro oper-state?                    srl_nokia-comm:admin-state
+          +--ro last-disabled-reason?          string
+          +--ro area-border-router?            boolean
+          +--ro as-border-router?              boolean
+          +--ro backbone-router?               boolean
+          +--ro overload-state?                enumeration
+          +--ro overload-rem-interval?         int32
+          +--ro last-overload-entered-time?    srl_nokia-comm:date-and-time-delta
+          +--ro last-overload-exit-time?       srl_nokia-comm:date-and-time-delta
+          +--ro last-overload-enter-code?      enumeration
+          +--ro last-overload-exit-code?       enumeration
+          +--ro overflow?                      boolean
+          +--ro last-overflow-entered-time?    srl_nokia-comm:date-and-time-delta
+          +--ro last-overflow-exit-time?       srl_nokia-comm:date-and-time-delta
+          +--ro opaque-lsa-support?            boolean
+          +--ro last-enabled-time?             srl_nokia-comm:date-and-time-delta
+          +--ro routes-submitted?              yang:gauge32
+          +--ro total-exported-routes?         yang:gauge32
+          +--ro ovld-lsa-limit-rem-interval?   int32
+          +--ro new-lsas-originated?           yang:counter32
+          +--ro new-lsas-received?             yang:counter32
+          +--ro extern-lsa-count?              yang:gauge32
+          +--ro extern-lsa-cksum-sum?          srl_nokia-comm:hex-number
+          +--ro spf
+          |  +--ro full-spf-runs?                yang:counter32
+          |  +--ro ext-spf-runs?                 yang:counter32
+          |  +--ro incremental-inter-spf-runs?   yang:counter32
+          |  +--ro incremental-ext-spf-runs?     yang:counter32
+          |  +--ro spf-attempts-failed?          yang:counter32
+          |  +--ro max-spf-run-interval?         int32
+          |  +--ro min-spf-run-interval?         int32
+          |  +--ro avg-spf-run-interval?         int32
+          |  +--ro last-full-spf
+          |  |  +--ro run-time?          srl_nokia-comm:date-and-time-delta
+          |  |  +--ro total-time?        int32
+          |  |  +--ro intra-spf-time?    int32
+          |  |  +--ro inter-spf-time?    int32
+          |  |  +--ro extern-spf-time?   int32
+          |  |  +--ro rtm-update-time?   int32
+          |  +--ro last-ext-spf
+          |     +--ro run-time?   srl_nokia-comm:date-and-time-delta
+          |     +--ro interval?   int32
+          +--ro lsa-totals
+          |  +--ro as-external-lsa?     yang:gauge32
+          |  +--ro e-as-external-lsa?   yang:gauge32
+          |  +--ro as-opaque-lsa?       yang:gauge32
+          |  +--ro router-info-lsa?     yang:gauge32
+          +--ro lsdb
+          |  +--ro lsa-types
+          |     +--ro lsa-type* [type]
+          |        +--ro type    identityref
+          |        +--ro lsas
+          |           +--ro lsa* [advertising-router link-state-id]
+          |              +--ro advertising-router     srl_nokia-comm:ipv4-address
+          |              +--ro link-state-id          srl_nokia-comm:ipv4-address
+          |              +--ro advertisement?         string
+          |              +--ro sequence-number?       srl_nokia-comm:hex-number
+          |              +--ro checksum?              srl_nokia-comm:hex-number
+          |              +--ro age?                   uint16
+          |              +--ro options?               srl_nokia-comm:hex-number
+          |              +--ro as-external-lsa
+          |              |  +--ro mask?                 uint8
+          |              |  +--ro metric-type?          enumeration
+          |              |  +--ro metric?               srl_nokia-ospf-types:ospf-metric-large
+          |              |  +--ro forwarding-address?   srl_nokia-comm:ipv4-address
+          |              |  +--ro external-route-tag?   uint32
+          |              |  +--ro types-of-service
+          |              |     +--ro type-of-service* [tos]
+          |              |        +--ro forwarding-address?   srl_nokia-comm:ipv4-address
+          |              |        +--ro external-route-tag?   uint32
+          |              |        +--ro tos                   uint8
+          |              |        +--ro metric?               srl_nokia-ospf-types:ospf-metric-large
+          |              +--ro opaque-lsa
+          |              |  +--ro scope?                enumeration
+          |              |  +--ro type?                 identityref
+          |              |  +--ro grace-lsa
+          |              |  |  +--ro tlvs
+          |              |  |     +--ro tlv* []
+          |              |  |        +--ro type?                   identityref
+          |              |  |        +--ro period?                 uint32
+          |              |  |        +--ro reason?                 enumeration
+          |              |  |        +--ro ip-interface-address?   srl_nokia-comm:ipv4-address
+          |              |  |        +--ro unknown-tlv
+          |              |  |           +--ro type?     uint16
+          |              |  |           +--ro length?   uint16
+          |              |  |           +--ro value?    binary
+          |              |  +--ro router-information
+          |              |  |  +--ro tlvs
+          |              |  |     +--ro tlv* []
+          |              |  |        +--ro type?                         union
+          |              |  |        +--ro unknown-tlv
+          |              |  |        |  +--ro type?     uint16
+          |              |  |        |  +--ro length?   uint16
+          |              |  |        |  +--ro value?    binary
+          |              |  |        +--ro informational-capabilities
+          |              |  |        |  +--ro graceful-restart-capable?   boolean
+          |              |  |        |  +--ro graceful-restart-helper?    boolean
+          |              |  |        |  +--ro stub-router?                boolean
+          |              |  |        |  +--ro point-to-point-over-lan?    boolean
+          |              |  |        |  +--ro experimental-te?            boolean
+          |              |  |        +--ro node-administrative-tags
+          |              |  |           +--ro administrative-tags*   uint32
+          |              |  +--ro extended-prefix
+          |              |  |  +--ro route-type?       enumeration
+          |              |  |  +--ro prefix-length?    uint8
+          |              |  |  +--ro address-family?   enumeration
+          |              |  |  +--ro attached?         boolean
+          |              |  |  +--ro node?             boolean
+          |              |  |  +--ro prefix?           srl_nokia-comm:ipv4-address
+          |              |  |  +--ro tlvs
+          |              |  |     +--ro tlv* []
+          |              |  |        +--ro type?                    identityref
+          |              |  |        +--ro extended-prefix-range
+          |              |  |        |  +--ro prefix-length?    uint8
+          |              |  |        |  +--ro address-family?   enumeration
+          |              |  |        |  +--ro range-size?       uint16
+          |              |  |        |  +--ro inter-area?       boolean
+          |              |  |        |  +--ro prefix?           srl_nokia-comm:ipv4-prefix
+          |              |  |        +--ro unknown-tlv
+          |              |  |           +--ro type?     uint16
+          |              |  |           +--ro length?   uint16
+          |              |  |           +--ro value?    binary
+          |              |  +--ro extended-link
+          |              |  |  +--ro link-type?   identityref
+          |              |  |  +--ro type?        identityref
+          |              |  |  +--ro link-id?     srl_nokia-comm:ipv4-address
+          |              |  |  +--ro link-data?   union
+          |              |  |  +--ro tlvs
+          |              |  |     +--ro tlv* []
+          |              |  |        +--ro type?          identityref
+          |              |  |        +--ro unknown-tlv
+          |              |  |           +--ro type?     uint16
+          |              |  |           +--ro length?   uint16
+          |              |  |           +--ro value?    binary
+          |              |  +--ro unknown-tlv
+          |              |     +--ro type?     uint16
+          |              |     +--ro length?   uint16
+          |              |     +--ro value?    binary
+          |              +--ro ospfv3-external-lsa
+          |                 +--ro metric?                       srl_nokia-ospf-types:ospf-metric-large
+          |                 +--ro flags?                        bits
+          |                 +--ro referenced-ls-type?           identityref
+          |                 +--ro unknown-referenced-ls-type?   uint16
+          |                 +--ro prefix?                       srl_nokia-comm:ip-prefix
+          |                 +--ro prefix-options
+          |                 |  +--ro prefix-options*   identityref
+          |                 +--ro forwarding-address?           srl_nokia-comm:ip-address
+          |                 +--ro external-route-tag?           uint32
+          |                 +--ro referenced-link-state-id?     uint32
+          +--rw ldp-synchronization! {srl_nokia-feat:ldp}?
+          |  +--rw hold-down-timer?   uint16
+          |  +--rw end-of-lib?        boolean
+          +--rw loopfree-alternate {srl-feat:ldp-lfa-ospf}?
+          |  +--rw admin-state?           srl_nokia-comm:admin-state
+          |  +--rw augment-route-table?   boolean {srl-feat:ldp-remote-lfa-ospf}?
+          |  +--rw exclude
+          |  |  +--rw prefix-policy*   -> /srl-rpol:routing-policy/policy/name
+          |  +--rw remote-lfa {srl-feat:ldp-remote-lfa-ospf}?
+          |     +--rw admin-state?    srl_nokia-comm:admin-state
+          |     +--rw max-pq-cost?    uint32
+          |     +--rw node-protect
+          |        +--rw admin-state?    srl_nokia-comm:admin-state
+          |        +--rw max-pq-nodes?   uint32
+          +--rw area* [area-id]
+             +--rw area-id                        srl_nokia-ospf-types:ospf-area-identifier
+             +--rw advertise-router-capability?   boolean
+             +--rw blackhole-aggregate?           boolean
+             +--rw loopfree-alternate-exclude?    boolean {srl-feat:ldp-lfa-ospf}?
+             +--rw export-policy?                 -> /srl-rpol:routing-policy/policy/name
+             +--rw stub!
+             |  +--rw default-metric?   uint16
+             |  +--rw summaries?        boolean
+             +--rw nssa!
+             |  +--rw redistribute-external?     boolean
+             |  +--rw summaries?                 boolean
+             |  +--rw area-range* [ip-prefix-mask]
+             |  |  +--rw ip-prefix-mask    srl_nokia-comm:ip-prefix-unicast-without-local
+             |  |  +--rw advertise?        boolean
+             |  +--rw originate-default-route!
+             |     +--rw type-nssa?         boolean
+             |     +--rw adjacency-check?   boolean
+             +--rw area-range* [ip-prefix-mask]
+             |  +--rw ip-prefix-mask    srl_nokia-comm:ip-prefix-unicast-without-local
+             |  +--rw advertise?        boolean
+             +--rw bgp-ls-exclude?                boolean {srl-feat:traffic-engineering-ospf}?
+             +--ro full-spf-runs?                 yang:counter32
+             +--ro last-spf-run-time?             srl_nokia-comm:date-and-time-delta
+             +--ro area-bdr-rtr-count?            yang:gauge32
+             +--ro as-bdr-rtr-count?              yang:gauge32
+             +--ro active-interfaces?             uint32
+             +--ro lsa-totals
+             |  +--ro router-lsa?                yang:gauge32
+             |  +--ro e-router-lsa?              yang:gauge32
+             |  +--ro network-lsa?               yang:gauge32
+             |  +--ro e-network-lsa?             yang:gauge32
+             |  +--ro network-summary-lsa?       yang:gauge32
+             |  +--ro asbr-summary-lsa?          yang:gauge32
+             |  +--ro nssa-lsa?                  yang:gauge32
+             |  +--ro e-nssa-lsa?                yang:gauge32
+             |  +--ro area-opaque-lsa?           yang:gauge32
+             |  +--ro inter-area-prefix-lsa?     yang:gauge32
+             |  +--ro e-inter-area-prefix-lsa?   yang:gauge32
+             |  +--ro inter-area-router-lsa?     yang:gauge32
+             |  +--ro e-inter-area-router-lsa?   yang:gauge32
+             |  +--ro intra-area-prefix-lsa?     yang:gauge32
+             |  +--ro e-intra-area-prefix-lsa?   yang:gauge32
+             |  +--ro router-info-lsa?           yang:gauge32
+             |  +--ro unknown-lsa?               yang:gauge32
+             |  +--ro total?                     yang:gauge32
+             |  +--ro total-lsa-cksum-sum?       srl_nokia-comm:hex-number
+             +--ro lsa-filter-totals
+             |  +--ro export-filtered?   yang:gauge32
+             |  +--ro import-filtered?   yang:gauge32
+             +--rw interface* [interface-name]
+             |  +--rw interface-name                 srl_nokia-comm:subinterface-all
+             |  +--rw advertise-router-capability?   boolean
+             |  +--rw admin-state?                   srl_nokia-comm:admin-state
+             |  +--rw advertise-subnet?              boolean
+             |  +--rw interface-type?                srl_nokia-ospf-types:interface-type
+             |  +--rw lsa-filter-out?                srl_nokia-ospf-types:lsa-filter-out
+             |  +--rw metric?                        srl_nokia-ospf-types:ospf-metric
+             |  +--rw mtu?                           uint32
+             |  +--rw passive?                       boolean
+             |  +--rw priority?                      uint16
+             |  +--rw hello-interval?                uint32
+             |  +--rw dead-interval?                 uint32
+             |  +--rw retransmit-interval?           uint32
+             |  +--rw transit-delay?                 uint32
+             |  +--rw loopfree-alternate-exclude?    boolean {srl-feat:ldp-lfa-ospf}?
+             |  +--rw authentication
+             |  |  +--rw keychain?   -> /srl_nokia-system:system/srl_nokia-keychains:authentication/keychain/name
+             |  +--rw failure-detection {srl-feat:bfd}?
+             |  |  +--rw enable-bfd?   boolean
+             |  +--rw trace-options
+             |  |  +--rw trace
+             |  |     +--rw adjacencies?   empty
+             |  |     +--rw interfaces?    empty
+             |  |     +--rw packet!
+             |  |        +--rw type?       enumeration
+             |  |        +--rw modifier?   enumeration
+             |  |        +--rw detail?     empty
+             |  +--ro neighbor* [router-id]
+             |  |  +--ro router-id                      yang:dotted-quad
+             |  |  +--ro address?                       srl_nokia-comm:ip-address-with-zone
+             |  |  +--ro priority?                      uint8
+             |  |  +--ro dead-time?                     uint32
+             |  |  +--ro designated-router?             yang:dotted-quad
+             |  |  +--ro backup-designated-router?      yang:dotted-quad
+             |  |  +--ro optional-capabilities?         yang:hex-string
+             |  |  +--ro last-established-time?         srl_nokia-comm:date-and-time-delta
+             |  |  +--ro adjacency-state?               identityref
+             |  |  +--ro state-changes?                 uint32
+             |  |  +--ro retransmission-queue-length?   uint32
+             |  |  +--ro restart-helper-status?         enumeration
+             |  |  +--ro restart-helper-age?            int32
+             |  |  +--ro restart-helper-exit-rc?        enumeration
+             |  |  +--ro last-restart-time?             srl_nokia-comm:date-and-time-delta
+             |  |  +--ro restart-reason?                srl_nokia-ospf-types:restart-reason-type
+             |  |  +--ro last-event-time?               srl_nokia-comm:date-and-time-delta
+             |  |  +--ro statistics
+             |  |     +--ro events?               yang:counter32
+             |  |     +--ro bad-nbr-states?       yang:counter32
+             |  |     +--ro lsa-install-failed?   yang:counter32
+             |  |     +--ro bad-seq-nums?         yang:counter32
+             |  |     +--ro bad-mtu?              yang:counter32
+             |  |     +--ro bad-packets?          yang:counter32
+             |  |     +--ro lsa-not-in-lsdbs?     yang:counter32
+             |  |     +--ro option-mismatches?    yang:counter32
+             |  |     +--ro duplicates?           yang:counter32
+             |  |     +--ro num-restarts?         yang:counter32
+             |  +--ro oper-state?                    enumeration
+             |  +--ro dr-id?                         yang:dotted-quad
+             |  +--ro bdr-id?                        yang:dotted-quad
+             |  +--ro last-enabled-time?             srl_nokia-comm:date-and-time-delta
+             |  +--ro neighbor-count?                yang:gauge32
+             |  +--ro local-ip-address?              srl_nokia-comm:ip-address
+             |  +--ro link-lsa-cksum-sum?            srl_nokia-comm:hex-number
+             |  +--ro link-lsa-count?                yang:gauge32
+             |  +--ro events?                        yang:counter32
+             |  +--ro last-event-time?               srl_nokia-comm:date-and-time-delta
+             |  +--ro packets
+             |  |  +--ro tx-total?            yang:counter32
+             |  |  +--ro tx-hello?            yang:counter32
+             |  |  +--ro tx-db-description?   yang:counter32
+             |  |  +--ro tx-ls-request?       yang:counter32
+             |  |  +--ro tx-ls-update?        yang:counter32
+             |  |  +--ro tx-ls-ack?           yang:counter32
+             |  |  +--ro rx-total?            yang:counter32
+             |  |  +--ro rx-hello?            yang:counter32
+             |  |  +--ro rx-db-description?   yang:counter32
+             |  |  +--ro rx-ls-request?       yang:counter32
+             |  |  +--ro rx-ls-update?        yang:counter32
+             |  |  +--ro rx-ls-ack?           yang:counter32
+             |  |  +--ro discarded?           yang:counter32
+             |  |  +--ro retransmits?         yang:counter32
+             |  +--ro bad-packets
+             |  |  +--ro bad-version?          yang:counter32
+             |  |  +--ro bad-network?          yang:counter32
+             |  |  +--ro bad-area?             yang:counter32
+             |  |  +--ro bad-dest-address?     yang:counter32
+             |  |  +--ro bad-neighbors?        yang:counter32
+             |  |  +--ro bad-packet-type?      yang:counter32
+             |  |  +--ro bad-length?           yang:counter32
+             |  |  +--ro bad-hello-interval?   yang:counter32
+             |  |  +--ro bad-dead-interval?    yang:counter32
+             |  |  +--ro bad-options?          yang:counter32
+             |  |  +--ro bad-checksum?         yang:counter32
+             |  |  +--ro bad-auth-type?        yang:counter32
+             |  |  +--ro auth-failures?        yang:counter32
+             |  |  +--ro bad-virtual-link?     yang:counter32
+             |  +--ro lsa-totals
+             |  |  +--ro link-opaque-lsa?   yang:gauge32
+             |  |  +--ro link-lsa?          yang:gauge32
+             |  |  +--ro e-link-lsa?        yang:gauge32
+             |  |  +--ro router-info-lsa?   yang:gauge32
+             |  +--ro lsdb
+             |  |  +--ro lsa-types
+             |  |     +--ro lsa-type* [type]
+             |  |        +--ro type    identityref
+             |  |        +--ro lsas
+             |  |           +--ro lsa* [advertising-router link-state-id]
+             |  |              +--ro advertising-router    srl_nokia-comm:ipv4-address
+             |  |              +--ro link-state-id         srl_nokia-comm:ipv4-address
+             |  |              +--ro advertisement?        string
+             |  |              +--ro sequence-number?      srl_nokia-comm:hex-number
+             |  |              +--ro checksum?             srl_nokia-comm:hex-number
+             |  |              +--ro age?                  uint16
+             |  |              +--ro options?              srl_nokia-comm:hex-number
+             |  |              +--ro opaque-lsa
+             |  |              |  +--ro scope?                enumeration
+             |  |              |  +--ro type?                 identityref
+             |  |              |  +--ro grace-lsa
+             |  |              |  |  +--ro tlvs
+             |  |              |  |     +--ro tlv* []
+             |  |              |  |        +--ro type?                   identityref
+             |  |              |  |        +--ro period?                 uint32
+             |  |              |  |        +--ro reason?                 enumeration
+             |  |              |  |        +--ro ip-interface-address?   srl_nokia-comm:ipv4-address
+             |  |              |  |        +--ro unknown-tlv
+             |  |              |  |           +--ro type?     uint16
+             |  |              |  |           +--ro length?   uint16
+             |  |              |  |           +--ro value?    binary
+             |  |              |  +--ro router-information
+             |  |              |  |  +--ro tlvs
+             |  |              |  |     +--ro tlv* []
+             |  |              |  |        +--ro type?                         union
+             |  |              |  |        +--ro unknown-tlv
+             |  |              |  |        |  +--ro type?     uint16
+             |  |              |  |        |  +--ro length?   uint16
+             |  |              |  |        |  +--ro value?    binary
+             |  |              |  |        +--ro informational-capabilities
+             |  |              |  |        |  +--ro graceful-restart-capable?   boolean
+             |  |              |  |        |  +--ro graceful-restart-helper?    boolean
+             |  |              |  |        |  +--ro stub-router?                boolean
+             |  |              |  |        |  +--ro point-to-point-over-lan?    boolean
+             |  |              |  |        |  +--ro experimental-te?            boolean
+             |  |              |  |        +--ro node-administrative-tags
+             |  |              |  |           +--ro administrative-tags*   uint32
+             |  |              |  +--ro extended-prefix
+             |  |              |  |  +--ro route-type?       enumeration
+             |  |              |  |  +--ro prefix-length?    uint8
+             |  |              |  |  +--ro address-family?   enumeration
+             |  |              |  |  +--ro attached?         boolean
+             |  |              |  |  +--ro node?             boolean
+             |  |              |  |  +--ro prefix?           srl_nokia-comm:ipv4-address
+             |  |              |  |  +--ro tlvs
+             |  |              |  |     +--ro tlv* []
+             |  |              |  |        +--ro type?                    identityref
+             |  |              |  |        +--ro extended-prefix-range
+             |  |              |  |        |  +--ro prefix-length?    uint8
+             |  |              |  |        |  +--ro address-family?   enumeration
+             |  |              |  |        |  +--ro range-size?       uint16
+             |  |              |  |        |  +--ro inter-area?       boolean
+             |  |              |  |        |  +--ro prefix?           srl_nokia-comm:ipv4-prefix
+             |  |              |  |        +--ro unknown-tlv
+             |  |              |  |           +--ro type?     uint16
+             |  |              |  |           +--ro length?   uint16
+             |  |              |  |           +--ro value?    binary
+             |  |              |  +--ro extended-link
+             |  |              |  |  +--ro link-type?   identityref
+             |  |              |  |  +--ro type?        identityref
+             |  |              |  |  +--ro link-id?     srl_nokia-comm:ipv4-address
+             |  |              |  |  +--ro link-data?   union
+             |  |              |  |  +--ro tlvs
+             |  |              |  |     +--ro tlv* []
+             |  |              |  |        +--ro type?          identityref
+             |  |              |  |        +--ro unknown-tlv
+             |  |              |  |           +--ro type?     uint16
+             |  |              |  |           +--ro length?   uint16
+             |  |              |  |           +--ro value?    binary
+             |  |              |  +--ro unknown-tlv
+             |  |              |     +--ro type?     uint16
+             |  |              |     +--ro length?   uint16
+             |  |              |     +--ro value?    binary
+             |  |              +--ro ospfv3-link-lsa
+             |  |                 +--ro rtr-priority?                   uint8
+             |  |                 +--ro lsa-options
+             |  |                 |  +--ro lsa-options*   identityref
+             |  |                 +--ro link-local-interface-address?   srl_nokia-comm:ipv6-address
+             |  |                 +--ro num-of-prefixes?                uint32
+             |  |                 +--ro prefixes* [prefix]
+             |  |                    +--ro prefix            srl_nokia-comm:ip-prefix
+             |  |                    +--ro prefix-options
+             |  |                       +--ro prefix-options*   identityref
+             |  +--rw ldp-synchronization {srl_nokia-feat:ldp}?
+             |     +--rw disable?           empty
+             |     +--rw hold-down-timer?   uint16
+             |     +--rw end-of-lib?        boolean
+             |     +--ro sync-state?        enumeration
+             |     +--ro duration?          uint32
+             +--ro lsdb
+                +--ro identifier?   srl_nokia-ospf-types:ospf-area-identifier
+                +--ro lsa-types
+                   +--ro lsa-type* [type]
+                      +--ro type    identityref
+                      +--ro lsas
+                         +--ro lsa* [advertising-router link-state-id]
+                            +--ro advertising-router              srl_nokia-comm:ipv4-address
+                            +--ro link-state-id                   srl_nokia-comm:ipv4-address
+                            +--ro advertisement?                  string
+                            +--ro sequence-number?                srl_nokia-comm:hex-number
+                            +--ro checksum?                       srl_nokia-comm:hex-number
+                            +--ro age?                            uint16
+                            +--ro options?                        srl_nokia-comm:hex-number
+                            +--ro router-lsa
+                            |  +--ro flags?          uint8
+                            |  +--ro number-links?   uint16
+                            |  +--ro links* [link-id]
+                            |     +--ro type?                 identityref
+                            |     +--ro link-id               srl_nokia-comm:ipv4-address
+                            |     +--ro link-data?            union
+                            |     +--ro metric?               srl_nokia-ospf-types:ospf-metric
+                            |     +--ro number-tos-metrics?   uint16
+                            |     +--ro types-of-service
+                            |        +--ro type-of-service* [tos]
+                            |           +--ro tos       uint8
+                            |           +--ro metric?   srl_nokia-ospf-types:ospf-metric-large
+                            +--ro network-lsa
+                            |  +--ro network-mask?      uint8
+                            |  +--ro attached-router*   yang:dotted-quad
+                            +--ro summary-lsa
+                            |  +--ro network-mask?       uint8
+                            |  +--ro metric?             srl_nokia-ospf-types:ospf-metric-large
+                            |  +--ro types-of-service
+                            |     +--ro type-of-service* [tos]
+                            |        +--ro tos       uint8
+                            |        +--ro metric?   srl_nokia-ospf-types:ospf-metric-large
+                            +--ro nssa-external-lsa
+                            |  +--ro mask?                 uint8
+                            |  +--ro metric-type?          enumeration
+                            |  +--ro metric?               srl_nokia-ospf-types:ospf-metric-large
+                            |  +--ro forwarding-address?   srl_nokia-comm:ipv4-address
+                            |  +--ro external-route-tag?   uint32
+                            |  +--ro propagate?            boolean
+                            |  +--ro types-of-service
+                            |     +--ro type-of-service* [tos]
+                            |        +--ro forwarding-address?   srl_nokia-comm:ipv4-address
+                            |        +--ro external-route-tag?   uint32
+                            |        +--ro tos                   uint8
+                            |        +--ro metric?               srl_nokia-ospf-types:ospf-metric-large
+                            +--ro opaque-lsa
+                            |  +--ro scope?                enumeration
+                            |  +--ro type?                 identityref
+                            |  +--ro grace-lsa
+                            |  |  +--ro tlvs
+                            |  |     +--ro tlv* []
+                            |  |        +--ro type?                   identityref
+                            |  |        +--ro period?                 uint32
+                            |  |        +--ro reason?                 enumeration
+                            |  |        +--ro ip-interface-address?   srl_nokia-comm:ipv4-address
+                            |  |        +--ro unknown-tlv
+                            |  |           +--ro type?     uint16
+                            |  |           +--ro length?   uint16
+                            |  |           +--ro value?    binary
+                            |  +--ro router-information
+                            |  |  +--ro tlvs
+                            |  |     +--ro tlv* []
+                            |  |        +--ro type?                         union
+                            |  |        +--ro unknown-tlv
+                            |  |        |  +--ro type?     uint16
+                            |  |        |  +--ro length?   uint16
+                            |  |        |  +--ro value?    binary
+                            |  |        +--ro informational-capabilities
+                            |  |        |  +--ro graceful-restart-capable?   boolean
+                            |  |        |  +--ro graceful-restart-helper?    boolean
+                            |  |        |  +--ro stub-router?                boolean
+                            |  |        |  +--ro point-to-point-over-lan?    boolean
+                            |  |        |  +--ro experimental-te?            boolean
+                            |  |        +--ro node-administrative-tags
+                            |  |           +--ro administrative-tags*   uint32
+                            |  +--ro extended-prefix
+                            |  |  +--ro route-type?       enumeration
+                            |  |  +--ro prefix-length?    uint8
+                            |  |  +--ro address-family?   enumeration
+                            |  |  +--ro attached?         boolean
+                            |  |  +--ro node?             boolean
+                            |  |  +--ro prefix?           srl_nokia-comm:ipv4-address
+                            |  |  +--ro tlvs
+                            |  |     +--ro tlv* []
+                            |  |        +--ro type?                    identityref
+                            |  |        +--ro extended-prefix-range
+                            |  |        |  +--ro prefix-length?    uint8
+                            |  |        |  +--ro address-family?   enumeration
+                            |  |        |  +--ro range-size?       uint16
+                            |  |        |  +--ro inter-area?       boolean
+                            |  |        |  +--ro prefix?           srl_nokia-comm:ipv4-prefix
+                            |  |        +--ro unknown-tlv
+                            |  |           +--ro type?     uint16
+                            |  |           +--ro length?   uint16
+                            |  |           +--ro value?    binary
+                            |  +--ro extended-link
+                            |  |  +--ro link-type?   identityref
+                            |  |  +--ro type?        identityref
+                            |  |  +--ro link-id?     srl_nokia-comm:ipv4-address
+                            |  |  +--ro link-data?   union
+                            |  |  +--ro tlvs
+                            |  |     +--ro tlv* []
+                            |  |        +--ro type?          identityref
+                            |  |        +--ro unknown-tlv
+                            |  |           +--ro type?     uint16
+                            |  |           +--ro length?   uint16
+                            |  |           +--ro value?    binary
+                            |  +--ro unknown-tlv
+                            |     +--ro type?     uint16
+                            |     +--ro length?   uint16
+                            |     +--ro value?    binary
+                            +--ro ospfv3-router-lsa
+                            |  +--ro lsa-options
+                            |  |  +--ro lsa-options*   identityref
+                            |  +--ro flags?         uint8
+                            |  +--ro link* [interface-id]
+                            |     +--ro interface-id             uint32
+                            |     +--ro neighbor-interface-id?   uint32
+                            |     +--ro neighbor-router-id?      yang:dotted-quad
+                            |     +--ro type?                    identityref
+                            |     +--ro metric?                  srl_nokia-ospf-types:ospf-metric
+                            +--ro ospfv3-network-lsa
+                            |  +--ro lsa-options
+                            |  |  +--ro lsa-options*   identityref
+                            |  +--ro attached-routers
+                            |     +--ro attached-router*   yang:dotted-quad
+                            +--ro ospfv3-inter-area-prefix-lsa
+                            |  +--ro metric?           srl_nokia-ospf-types:ospf-metric-large
+                            |  +--ro prefix?           srl_nokia-comm:ip-prefix
+                            |  +--ro prefix-options
+                            |     +--ro prefix-options*   identityref
+                            +--ro ospfv3-inter-area-router-lsa
+                            |  +--ro lsa-options
+                            |  |  +--ro lsa-options*   identityref
+                            |  +--ro metric?                  srl_nokia-ospf-types:ospf-metric-large
+                            |  +--ro destination-router-id?   yang:dotted-quad
+                            +--ro ospfv3-external-lsa
+                            |  +--ro metric?                       srl_nokia-ospf-types:ospf-metric-large
+                            |  +--ro flags?                        bits
+                            |  +--ro referenced-ls-type?           identityref
+                            |  +--ro unknown-referenced-ls-type?   uint16
+                            |  +--ro prefix?                       srl_nokia-comm:ip-prefix
+                            |  +--ro prefix-options
+                            |  |  +--ro prefix-options*   identityref
+                            |  +--ro forwarding-address?           srl_nokia-comm:ip-address
+                            |  +--ro external-route-tag?           uint32
+                            |  +--ro referenced-link-state-id?     uint32
+                            +--ro ospfv3-intra-area-prefix-lsa
+                               +--ro referenced-ls-type?           identityref
+                               +--ro unknown-referenced-ls-type?   uint16
+                               +--ro referenced-link-state-id?     uint32
+                               +--ro referenced-adv-router?        yang:dotted-quad
+                               +--ro num-of-prefixes?              uint16
+                               +--ro prefixes* [prefix]
+                                  +--ro prefix            srl_nokia-comm:ip-prefix
+                                  +--ro prefix-options
+                                  |  +--ro prefix-options*   identityref
+                                  +--ro metric?           srl_nokia-ospf-types:ospf-metric

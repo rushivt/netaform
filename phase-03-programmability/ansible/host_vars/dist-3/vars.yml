@@ -1,0 +1,53 @@
+hostname: dist-3
+router_id: 10.0.255.13
+
+routed_interfaces:
+  - name: ethernet-1/1
+    description: "Link to EDGE-1"
+    ipv4_address: 10.0.1.14/30
+  - name: ethernet-1/2
+    description: "Link to DIST-2"
+    ipv4_address: 10.0.1.18/30
+
+access_interfaces:
+  - name: ethernet-1/3
+    description: "Host-DEVOPS access port"
+    vlan_id: 40
+
+loopback:
+  name: system0
+  ipv4_address: 10.0.255.13/32
+
+irb_interfaces:
+  - subinterface: 10
+    ipv4_address: 10.0.10.4/24
+  - subinterface: 20
+    ipv4_address: 10.0.20.4/24
+  - subinterface: 30
+    ipv4_address: 10.0.30.4/24
+  - subinterface: 40
+    ipv4_address: 10.0.40.4/24
+
+vlans:
+  - id: 10
+    name: Engineering
+  - id: 20
+    name: Sales
+  - id: 30
+    name: Servers
+  - id: 40
+    name: DevOps
+
+ospf:
+  instance_name: main
+  version: ospf-v2
+  router_id: 10.0.255.13
+  area: 0.0.0.0
+  interfaces:
+    - ethernet-1/1.0
+    - ethernet-1/2.0
+    - irb0.10
+    - irb0.20
+    - irb0.30
+    - irb0.40
+    - system0.0

@@ -17,7 +17,10 @@ configure terminal
 username admin privilege 15 secret admin
 aaa authorization exec default local
 management api http-commands
-   no shutdown"
+   no shutdown
+management api netconf
+   transport ssh default
+end"
   echo "  Bootstrapped ${device}"
 done
 

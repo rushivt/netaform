@@ -1,0 +1,77 @@
+name: branch-office
+
+topology:
+  nodes:
+    isp-rtr:
+      kind: linux
+      image: frrouting/frr:latest
+      binds:
+        - ../../phase-01-branch-office/configs/isp-rtr/frr.conf:/etc/frr/frr.conf
+        - ../../phase-01-branch-office/configs/isp-rtr/daemons:/etc/frr/daemons
+
+    edge-1:
+      kind: ceos
+      image: ceos:4.35.1F
+      startup-config: ../../phase-01-branch-office/configs/edge-1/startup-config
+
+    dist-1:
+      kind: ceos
+      image: ceos:4.35.1F
+      startup-config: ../../phase-01-branch-office/configs/dist-1/startup-config
+
+    dist-2:
+      kind: ceos
+      image: ceos:4.35.1F
+      startup-config: ../../phase-01-branch-office/configs/dist-2/startup-config
+
+    dist-3:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:latest
+      type: ixr-d3
+
+    host-eng:
+      kind: linux
+      image: alpine:latest
+
+    host-sales:
+      kind: linux
+      image: alpine:latest
+
+    host-server:
+      kind: linux
+      image: alpine:latest
+
+    host-devops:
+      kind: linux
+      image: alpine:latest
+
+  links:
+    # ISP-RTR to EDGE-1 (eBGP peering)
+    - endpoints: ["isp-rtr:eth1", "edge-1:eth1"]
+
+    # EDGE-1 to DIST-1 (OSPF)
+    - endpoints: ["edge-1:eth2", "dist-1:eth1"]
+
+    # EDGE-1 to DIST-2 (OSPF)
+    - endpoints: ["edge-1:eth3", "dist-2:eth1"]
+
+    # EDGE-1 to DIST-3 (OSPF)
+    - endpoints: ["edge-1:eth4", "dist-3:e1-1"]
+
+    # DIST-1 to DIST-2 (Inter-switch link)
+    - endpoints: ["dist-1:eth2", "dist-2:eth2"]
+
+    # DIST-2 to DIST-3 (Inter-switch link)
+    - endpoints: ["dist-2:eth5", "dist-3:e1-2"]
+
+    # HOST-ENG to DIST-1
+    - endpoints: ["host-eng:eth1", "dist-1:eth3"]
+
+    # HOST-SALES to DIST-2
+    - endpoints: ["host-sales:eth1", "dist-2:eth3"]
+
+    # HOST-SERVER to DIST-2
+    - endpoints: ["host-server:eth1", "dist-2:eth4"]
+
+    # HOST-DEVOPS to DIST-3
+    - endpoints: ["host-devops:eth1", "dist-3:e1-3"]

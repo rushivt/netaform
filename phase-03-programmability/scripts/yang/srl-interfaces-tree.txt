@@ -1,0 +1,372 @@
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1376): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1384): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1388): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1536): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1540): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1540): warning: node "srl_nokia-interfaces::vlan-tagging" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1544): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1544): warning: node "srl_nokia-interfaces::tpid" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1548): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1552): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1556): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:1560): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2407): warning: node "srl_nokia-interfaces::qos" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2414): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2418): warning: node "srl_nokia-interfaces::vlan-tagging" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2422): warning: node "srl_nokia-interfaces::vlan-tagging" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2422): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2426): warning: node "srl_nokia-interfaces::tpid" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2430): warning: node "srl_nokia-interfaces::tpid" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2430): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2438): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2446): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2454): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:2471): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3017): warning: node "srl_nokia-interfaces::lag" is not found in "srl_nokia-interfaces::interface"
+srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3707 (at srl_nokia/models/interfaces/srl_nokia-interfaces.yang:3038): warning: node "srl_nokia-interfaces::vlan-tagging" is not found in "srl_nokia-interfaces::interface"
+module: srl_nokia-interfaces
+  +--rw interface* [name]
+     +--rw name                     srl_nokia-comm:interface-all
+     +--rw description?             srl_nokia-comm:description
+     +--rw admin-state?             srl_nokia-comm:admin-state
+     +--rw num-physical-channels?   uint8 {srl_nokia-feat:num-physical-channels}?
+     +--rw breakout-mode! {srl_nokia-feat:port-breakout}?
+     |  +--rw num-breakout-ports       enumeration
+     |  +--rw breakout-port-speed      enumeration
+     |  +--rw num-physical-channels?   uint8 {srl_nokia-feat:num-physical-channels-breakout}?
+     +--rw mtu?                     uint16
+     +--rw swap-src-dst-mac?        boolean {srl_nokia-feat:loopback-mode-facility}?
+     +--ro ifindex?                 uint32
+     +--ro oper-state?              enumeration
+     +--ro oper-down-reason?        port-oper-down-reason
+     +--ro last-change?             srl_nokia-comm:date-and-time-delta
+     +--ro linecard?                -> /srl_nokia-plat:platform/srl_nokia-lc:linecard/slot
+     +--ro forwarding-complex?      -> /srl_nokia-plat:platform/srl_nokia-lc:linecard/forwarding-complex/name
+     +--ro phy-group-members*       string {srl_nokia-feat:port-groups}?
+     +--ro physical-channel*        -> /interface/transceiver/channel/index
+     +--ro forwarding-mode?         enumeration {srl_nokia-feat:system-forwarding-mode}?
+     +--ro statistics
+     |  +--ro in-packets?              srl_nokia-comm:zero-based-counter64
+     |  +--ro in-octets?               srl_nokia-comm:zero-based-counter64
+     |  +--ro in-unicast-packets?      srl_nokia-comm:zero-based-counter64
+     |  +--ro in-broadcast-packets?    srl_nokia-comm:zero-based-counter64
+     |  +--ro in-multicast-packets?    srl_nokia-comm:zero-based-counter64
+     |  +--ro in-discarded-packets?    srl_nokia-comm:zero-based-counter64
+     |  +--ro in-error-packets?        srl_nokia-comm:zero-based-counter64
+     |  +--ro in-fcs-error-packets?    srl_nokia-comm:zero-based-counter64
+     |  +--ro out-packets?             srl_nokia-comm:zero-based-counter64
+     |  +--ro out-octets?              srl_nokia-comm:zero-based-counter64
+     |  +--ro out-mirror-octets?       srl_nokia-comm:zero-based-counter64 {srl_nokia-feat:mirroring-intf-stats}?
+     |  +--ro out-unicast-packets?     srl_nokia-comm:zero-based-counter64
+     |  +--ro out-broadcast-packets?   srl_nokia-comm:zero-based-counter64
+     |  +--ro out-multicast-packets?   srl_nokia-comm:zero-based-counter64
+     |  +--ro out-discarded-packets?   srl_nokia-comm:zero-based-counter64
+     |  +--ro out-error-packets?       srl_nokia-comm:zero-based-counter64
+     |  +--ro out-mirror-packets?      srl_nokia-comm:zero-based-counter64 {srl_nokia-feat:mirroring-intf-stats}?
+     |  +--ro carrier-transitions?     srl_nokia-comm:zero-based-counter64
+     |  +--ro interface-transitions?   srl_nokia-comm:zero-based-counter64 {srl_nokia-feat:stat-interface-link-transitions}?
+     |  +--ro link-transitions?        srl_nokia-comm:zero-based-counter64 {srl_nokia-feat:stat-interface-link-transitions}?
+     |  +--ro last-clear?              srl_nokia-comm:date-and-time-delta
+     +--ro traffic-rate
+     |  +--ro in-bps?    uint64
+     |  +--ro out-bps?   uint64
+     +--ro adapter
+     |  +--ro model-number?              string
+     |  +--ro type?                      enumeration
+     |  +--ro vendor-manufacture-date?   string
+     |  +--ro vendor-oui?                string
+     |  +--ro vendor-part-number?        string
+     |  +--ro vendor-serial-number?      string
+     +--rw transceiver
+     |  +--rw functional-type?             identityref {srl_nokia-feat:digital-coherent-optics or srl_nokia-feat:optical-line-system}?
+     |  +--rw tx-laser?                    boolean
+     |  +--ro oper-state?                  transceiver-oper-state
+     |  +--ro oper-down-reason?            transceiver-oper-down-reason
+     |  +--rw ddm-events?                  boolean
+     |  +--ro form-factor?                 enumeration
+     |  +--ro ethernet-pmd?                string
+     |  +--ro connector-type?              enumeration
+     |  +--ro vendor?                      string
+     |  +--ro vendor-oui?                  string {srl_nokia-feat:transceiver-firmware-upgrade}?
+     |  +--ro vendor-part-number?          string
+     |  +--ro vendor-revision?             string
+     |  +--ro vendor-lot-number?           string
+     |  +--ro serial-number?               string
+     |  +--ro date-code?                   srl_nokia-comm:date-and-time-delta
+     |  +--ro clei-code?                   string {srl_nokia-feat:transceiver-firmware-upgrade}?
+     |  +--ro firmware-version?            string {srl_nokia-feat:transceiver-firmware-version}?
+     |  +--ro inactive-firmware-version?   string {srl_nokia-feat:transceiver-firmware-upgrade}?
+     |  +--ro fault-condition?             boolean
+     |  +--ro cmis-revision?               string {srl_nokia-feat:transceiver-firmware-upgrade}?
+     |  +--ro wavelength?                  decimal64
+     |  +--ro link-length-information?     string {srl_nokia-feat:transceiver-link-length-info}?
+     |  +--ro temperature
+     |  |  +--ro latest-value?             srl_nokia-comm:temperature
+     |  |  +--ro maximum?                  srl_nokia-comm:temperature
+     |  |  +--ro maximum-time?             srl_nokia-comm:date-and-time-delta
+     |  |  +--ro high-alarm-condition?     boolean
+     |  |  +--ro high-alarm-threshold?     srl_nokia-comm:temperature
+     |  |  +--ro low-alarm-condition?      boolean
+     |  |  +--ro low-alarm-threshold?      srl_nokia-comm:temperature
+     |  |  +--ro high-warning-condition?   boolean
+     |  |  +--ro high-warning-threshold?   srl_nokia-comm:temperature
+     |  |  +--ro low-warning-condition?    boolean
+     |  |  +--ro low-warning-threshold?    srl_nokia-comm:temperature
+     |  +--ro voltage
+     |  |  +--ro latest-value?             decimal64
+     |  |  +--ro high-alarm-condition?     boolean
+     |  |  +--ro high-alarm-threshold?     decimal64
+     |  |  +--ro low-alarm-condition?      boolean
+     |  |  +--ro low-alarm-threshold?      decimal64
+     |  |  +--ro high-warning-condition?   boolean
+     |  |  +--ro high-warning-threshold?   decimal64
+     |  |  +--ro low-warning-condition?    boolean
+     |  |  +--ro low-warning-threshold?    decimal64
+     |  +--ro channel* [index]
+     |  |  +--ro index         uint8
+     |  |  +--ro wavelength?   decimal64
+     |  +--ro cdb-capabilities {srl_nokia-feat:transceiver-cdb-capabilities}?
+     |  |  +--ro image-bank-count?   uint32
+     |  |  +--ro epl-block-size?     boolean
+     |  |  +--ro hitless-restart?    boolean
+     |  +--ro firmware {srl_nokia-feat:transceiver-firmware-upgrade}?
+     |     +--ro install-state
+     |        +--ro install-status?              transceiver-firmware-install-status
+     |        +--ro transfer-percent-complete?   srl_nokia-comm:percentage
+     |        +--ro transfer-start-time?         srl_nokia-comm:date-and-time-delta
+     |        +--ro transfer-end-time?           srl_nokia-comm:date-and-time-delta
+     |        +--ro last-known-failure?          string
+     +--rw ethernet
+     |  +--rw aggregate-id?                 -> /interface/name {srl_nokia-feat:lag}?
+     |  +--rw forwarding-viable?            boolean {srl_nokia-feat:lag-forwarding-viable}?
+     |  +--rw auto-negotiate?               boolean {srl_nokia-feat:platform-7220-d1 or srl_nokia-feat:ac5x or srl_nokia-feat:future-0-0}?
+     |  +--rw duplex-mode?                  enumeration {srl_nokia-feat:platform-7220-d1 or srl_nokia-feat:ac5x or srl_nokia-feat:future-0-0}?
+     |  +--rw dac-link-training?            boolean {srl_nokia-feat:dac-link-training}?
+     |  +--rw flow-control
+     |  |  +--rw receive?    boolean
+     |  |  +--rw transmit?   boolean {srl_nokia-feat:tx-flow-control}?
+     |  +--rw lacp-port-priority?           uint16 {srl_nokia-feat:lacp-fallback}?
+     |  +--rw port-speed?                   enumeration
+     |  +--ro hw-mac-address?               srl_nokia-comm:mac-address
+     |  +--rw mac-address?                  srl_nokia-comm:mac-address {srl_nokia-feat:configurable-intf-mac-addr}?
+     |  +--rw forward-error-correction {srl_nokia-feat:forward-error-correction-ethernet}?
+     |  |  +--rw fec-option?                enumeration
+     |  |  +--ro operational-host-if-fec?   oper-fec-type
+     |  |  +--ro statistics
+     |  |     +--ro host-if-fec-router {srl_nokia-feat:port-host-if-fec-stats-router}?
+     |  |     |  +--ro status?              enumeration
+     |  |     |  +--ro frame-error-count?   srl_nokia-comm:zero-based-counter64
+     |  |     |  +--ro pre-fec-ber
+     |  |     |     +--ro instant?   decimal64
+     |  |     +--ro host-if-fec-transceiver {srl_nokia-feat:port-host-if-fec-stats-transceiver}?
+     |  |        +--ro frame-error-count
+     |  |        |  +--ro instant?   srl_nokia-comm:zero-based-counter64
+     |  |        |  +--ro avg?       srl_nokia-comm:zero-based-counter64
+     |  |        |  +--ro min?       srl_nokia-comm:zero-based-counter64
+     |  |        |  +--ro max?       srl_nokia-comm:zero-based-counter64
+     |  |        +--ro pre-fec-ber
+     |  |           +--ro instant?   decimal64
+     |  |           +--ro avg?       decimal64
+     |  |           +--ro min?       decimal64
+     |  |           +--ro max?       decimal64
+     |  +--ro physical-medium?              enumeration
+     |  +--rw ptp-asymmetry?                int32 {srl_nokia-feat:sync}?
+     |  +--rw ptp-timestamping! {srl_nokia-feat:sync-ptp-ip-peers and srl_nokia-feat:special-ptp-ip-timestamping}?
+     |  |  +--rw disable-ip-timestamping?   boolean
+     |  +--rw standby-signaling?            enumeration
+     |  +--rw link-loss-forwarding?         boolean {srl_nokia-feat:link-loss-forwarding}?
+     |  +--rw reload-delay?                 uint32 {srl_nokia-feat:reload-delay}?
+     |  +--ro reload-delay-expires?         srl_nokia-comm:date-and-time-delta {srl_nokia-feat:reload-delay}?
+     |  +--rw hold-time
+     |  |  +--rw up?             uint32
+     |  |  +--ro up-expires?     srl_nokia-comm:date-and-time-delta
+     |  |  +--rw down?           uint32
+     |  |  +--ro down-expires?   srl_nokia-comm:date-and-time-delta
+     |  +--rw crc-monitor {srl_nokia-feat:crc-symbol-monitoring}?
+     |  |  +--rw admin-state?      srl_nokia-comm:admin-state
+     |  |  +--rw window-size?      uint32
+     |  |  +--rw signal-degrade
+     |  |  |  +--rw exponent?     uint32
+     |  |  |  +--rw multiplier?   uint32
+     |  |  +--rw signal-failure
+     |  |  |  +--rw exponent?     uint32
+     |  |  |  +--rw multiplier?   uint32
+     |  |  +--ro current-alarms*   ethernet-monitor-report-status
+     |  +--rw symbol-monitor {srl_nokia-feat:crc-symbol-monitoring}?
+     |  |  +--rw admin-state?      srl_nokia-comm:admin-state
+     |  |  +--rw window-size?      uint32
+     |  |  +--rw signal-degrade
+     |  |  |  +--rw exponent?     uint32
+     |  |  |  +--rw multiplier?   uint32
+     |  |  +--rw signal-failure
+     |  |  |  +--rw exponent?     uint32
+     |  |  |  +--rw multiplier?   uint32
+     |  |  +--ro current-alarms*   ethernet-monitor-report-status
+     |  +--rw exponential-port-dampening {srl_nokia-feat:exponential-port-dampening}?
+     |  |  +--rw admin-state?          srl_nokia-comm:admin-state
+     |  |  +--rw half-life?            uint32
+     |  |  +--rw max-suppress-time?    uint32
+     |  |  +--rw reuse-threshold?      uint32
+     |  |  +--rw suppress-threshold?   uint32
+     |  |  +--ro current-penalties?    srl_nokia-comm:zero-based-counter64
+     |  |  +--ro max-penalties?        srl_nokia-comm:zero-based-counter64
+     |  |  +--ro oper-state?           enumeration
+     |  +--rw storm-control! {srl_nokia-feat:storm-control}?
+     |  |  +--rw units?                              enumeration
+     |  |  +--rw broadcast-rate?                     uint32
+     |  |  +--rw multicast-rate?                     uint32
+     |  |  +--rw unknown-unicast-rate?               uint32
+     |  |  +--ro operational-broadcast-rate?         uint32
+     |  |  +--ro operational-multicast-rate?         uint32
+     |  |  +--ro operational-unknown-unicast-rate?   uint32
+     |  |  +--rw rising-threshold-action?            enumeration {srl_nokia-feat:storm-control-action}?
+     |  +--rw synce! {srl_nokia-feat:sync}?
+     |  |  +--rw ssm
+     |  |     +--rw admin-state?   srl_nokia-comm:admin-state
+     |  +--rw poe {srl_nokia-feat:poe}?
+     |  |  +--rw admin-state?      srl_nokia-comm:admin-state
+     |  |  +--rw poe-admin-type?   poe-type
+     |  |  +--ro poe-oper-state?   poe-oper-state-type
+     |  |  +--ro power-class?      poe-class
+     |  |  +--ro power-used?       decimal64
+     |  +--ro statistics
+     |     +--ro in-mac-pause-frames?          srl_nokia-comm:zero-based-counter64
+     |     +--ro in-oversize-frames?           srl_nokia-comm:zero-based-counter64
+     |     +--ro in-undersize-frames?          srl_nokia-comm:zero-based-counter64 {srl_nokia-feat:intf-eth-in-undersize-frames}?
+     |     +--ro in-jabber-frames?             srl_nokia-comm:zero-based-counter64
+     |     +--ro in-fragment-frames?           srl_nokia-comm:zero-based-counter64
+     |     +--ro in-crc-error-frames?          srl_nokia-comm:zero-based-counter64
+     |     +--ro out-mac-pause-frames?         srl_nokia-comm:zero-based-counter64
+     |     +--ro in-64b-frames?                srl_nokia-comm:zero-based-counter64
+     |     +--ro in-65b-to-127b-frames?        srl_nokia-comm:zero-based-counter64
+     |     +--ro in-128b-to-255b-frames?       srl_nokia-comm:zero-based-counter64
+     |     +--ro in-256b-to-511b-frames?       srl_nokia-comm:zero-based-counter64
+     |     +--ro in-512b-to-1023b-frames?      srl_nokia-comm:zero-based-counter64
+     |     +--ro in-1024b-to-1518b-frames?     srl_nokia-comm:zero-based-counter64
+     |     +--ro in-1519b-or-longer-frames?    srl_nokia-comm:zero-based-counter64
+     |     +--ro out-64b-frames?               srl_nokia-comm:zero-based-counter64
+     |     +--ro out-65b-to-127b-frames?       srl_nokia-comm:zero-based-counter64
+     |     +--ro out-128b-to-255b-frames?      srl_nokia-comm:zero-based-counter64
+     |     +--ro out-256b-to-511b-frames?      srl_nokia-comm:zero-based-counter64
+     |     +--ro out-512b-to-1023b-frames?     srl_nokia-comm:zero-based-counter64
+     |     +--ro out-1024b-to-1518b-frames?    srl_nokia-comm:zero-based-counter64
+     |     +--ro out-1519b-or-longer-frames?   srl_nokia-comm:zero-based-counter64
+     |     +--ro last-clear?                   srl_nokia-comm:date-and-time-delta
+     +--rw subinterface* [index]
+     |  +--rw index                            uint32
+     |  +--rw type?                            identityref
+     |  +--rw description?                     srl_nokia-comm:description
+     |  +--rw admin-state?                     srl_nokia-comm:admin-state
+     |  +--rw ip-mtu?                          uint16
+     |  +--rw l2-mtu?                          uint16 {srl_nokia-feat:config-sub-if-l2-mtu}?
+     |  +--rw mpls-mtu?                        uint16 {srl_nokia-feat:mpls}?
+     |  +--rw evpn-interface-ful-unnumbered! {srl_nokia-feat:evpn-iff-unnumbered}?
+     |  +--rw unidirectional-link-delay {srl_nokia-feat:traffic-engineering or srl_nokia-feat:link-measurement}?
+     |  |  +--rw static-delay?                  union {srl_nokia-feat:traffic-engineering}?
+     |  |  +--ro last-reported-dynamic-delay?   union {srl_nokia-feat:link-measurement}?
+     |  +--ro name?                            string
+     |  +--ro ifindex?                         uint32
+     |  +--ro oper-state?                      enumeration
+     |  +--ro oper-down-reason?                subif-oper-down-reason
+     |  +--ro last-change?                     srl_nokia-comm:date-and-time-delta
+     |  +--rw collect-irb-stats?               boolean {srl_nokia-feat:subif-detailed-stats-config}?
+     |  +--rw collect-detailed-stats?          boolean {srl_nokia-feat:subif-detailed-stats-config}?
+     |  +--rw ipv4
+     |  |  +--rw admin-state?                srl_nokia-comm:admin-state
+     |  |  +--rw address* [ip-prefix]
+     |  |  |  +--rw ip-prefix     srl_nokia-comm:ipv4-prefix-with-host-bits
+     |  |  |  +--rw anycast-gw?   boolean {srl_feat:anycast-gw}?
+     |  |  |  +--ro origin?       address-origin
+     |  |  |  +--rw primary?      empty
+     |  |  |  +--ro status?       ipv4-address-status
+     |  |  +--rw allow-directed-broadcast?   boolean
+     |  |  +--rw unnumbered {srl_feat:ipv4-unnumbered}?
+     |  |  |  +--rw admin-state?                  srl_nokia-comm:admin-state
+     |  |  |  +--rw interface?                    srl_nokia-comm:subinterface-all
+     |  |  |  +--ro address?                      srl_nokia-comm:ipv4-address
+     |  |  |  +--ro unavailable-address-reason?   enumeration
+     |  |  +--ro statistics {srl_feat:subif-stats-per-ipv4-ipv6-container}?
+     |  |     +--ro in-packets?               srl_nokia-comm:zero-based-counter64
+     |  |     +--ro in-octets?                srl_nokia-comm:zero-based-counter64
+     |  |     +--ro in-error-packets?         srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:fpcx}?
+     |  |     +--ro in-discarded-packets?     srl_nokia-comm:zero-based-counter64
+     |  |     +--ro in-terminated-packets?    srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:vsrl or srl_feat:fpcx}?
+     |  |     +--ro in-terminated-octets?     srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:vsrl or srl_feat:fpcx}?
+     |  |     +--ro in-forwarded-packets?     srl_nokia-comm:zero-based-counter64
+     |  |     +--ro in-forwarded-octets?      srl_nokia-comm:zero-based-counter64
+     |  |     +--ro in-matched-ra-packets?    srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-forwarded-packets?    srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-forwarded-octets?     srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-originated-packets?   srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-originated-octets?    srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-error-packets?        srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:fpcx}?
+     |  |     +--ro out-discarded-packets?    srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-packets?              srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-octets?               srl_nokia-comm:zero-based-counter64
+     |  |     +--ro last-clear?               srl_nokia-comm:date-and-time-delta
+     |  +--rw ipv6
+     |  |  +--rw admin-state?   srl_nokia-comm:admin-state
+     |  |  +--rw address* [ip-prefix]
+     |  |  |  +--rw ip-prefix     srl_nokia-comm:ipv6-prefix-with-host-bits
+     |  |  |  +--rw type?         srl_nokia-comm:ipv6-address-type
+     |  |  |  +--rw anycast-gw?   boolean {srl_feat:anycast-gw}?
+     |  |  |  +--ro origin?       address-origin
+     |  |  |  +--rw primary?      empty
+     |  |  |  +--ro status?       ipv6-address-status
+     |  |  +--ro statistics {srl_feat:subif-stats-per-ipv4-ipv6-container}?
+     |  |     +--ro in-packets?               srl_nokia-comm:zero-based-counter64
+     |  |     +--ro in-octets?                srl_nokia-comm:zero-based-counter64
+     |  |     +--ro in-error-packets?         srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:fpcx}?
+     |  |     +--ro in-discarded-packets?     srl_nokia-comm:zero-based-counter64
+     |  |     +--ro in-terminated-packets?    srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:vsrl or srl_feat:fpcx}?
+     |  |     +--ro in-terminated-octets?     srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:vsrl or srl_feat:fpcx}?
+     |  |     +--ro in-forwarded-packets?     srl_nokia-comm:zero-based-counter64
+     |  |     +--ro in-forwarded-octets?      srl_nokia-comm:zero-based-counter64
+     |  |     +--ro in-matched-ra-packets?    srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-forwarded-packets?    srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-forwarded-octets?     srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-originated-packets?   srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-originated-octets?    srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-error-packets?        srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:fpcx}?
+     |  |     +--ro out-discarded-packets?    srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-packets?              srl_nokia-comm:zero-based-counter64
+     |  |     +--ro out-octets?               srl_nokia-comm:zero-based-counter64
+     |  |     +--ro last-clear?               srl_nokia-comm:date-and-time-delta
+     |  +--rw anycast-gw! {srl_feat:anycast-gw}?
+     |  |  +--rw virtual-router-id?       uint8
+     |  |  +--rw anycast-gw-mac?          srl_nokia-comm:mac-address
+     |  |  +--ro anycast-gw-mac-origin?   anycast-gw-mac-origin
+     |  +--ro statistics
+     |  |  +--ro in-packets?               srl_nokia-comm:zero-based-counter64
+     |  |  +--ro in-octets?                srl_nokia-comm:zero-based-counter64
+     |  |  +--ro in-error-packets?         srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:fpcx}?
+     |  |  +--ro in-discarded-packets?     srl_nokia-comm:zero-based-counter64
+     |  |  +--ro in-terminated-packets?    srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:vsrl or srl_feat:fpcx}?
+     |  |  +--ro in-terminated-octets?     srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:vsrl or srl_feat:fpcx}?
+     |  |  +--ro in-forwarded-packets?     srl_nokia-comm:zero-based-counter64
+     |  |  +--ro in-forwarded-octets?      srl_nokia-comm:zero-based-counter64
+     |  |  +--ro in-matched-ra-packets?    srl_nokia-comm:zero-based-counter64
+     |  |  +--ro out-forwarded-packets?    srl_nokia-comm:zero-based-counter64
+     |  |  +--ro out-forwarded-octets?     srl_nokia-comm:zero-based-counter64
+     |  |  +--ro out-originated-packets?   srl_nokia-comm:zero-based-counter64
+     |  |  +--ro out-originated-octets?    srl_nokia-comm:zero-based-counter64
+     |  |  +--ro out-error-packets?        srl_nokia-comm:zero-based-counter64 {srl_feat:ixr-dnx or srl_feat:fpcx}?
+     |  |  +--ro out-discarded-packets?    srl_nokia-comm:zero-based-counter64
+     |  |  +--ro out-packets?              srl_nokia-comm:zero-based-counter64
+     |  |  +--ro out-octets?               srl_nokia-comm:zero-based-counter64
+     |  |  +--ro last-clear?               srl_nokia-comm:date-and-time-delta
+     |  +--rw bridge-table! {srl_nokia-feat:bridged}?
+     |     +--rw discard-unknown-src-mac?   boolean
+     |     +--rw mac-limit
+     |     |  +--rw maximum-entries?         int32
+     |     |  +--rw warning-threshold-pct?   int32
+     |     +--rw mac-learning
+     |     |  +--rw admin-state?   srl_nokia-comm:admin-state
+     |     |  +--rw aging
+     |     |     +--rw admin-state?   srl_nokia-comm:admin-state
+     |     +--rw mac-duplication
+     |        +--rw action?   enumeration
+     +--rw sflow! {srl_nokia-feat:sflow}?
+        +--rw admin-state?             srl_nokia-comm:admin-state
+        +--rw ingress-sampling-rate?   uint32 {srl_nokia-feat:sflow-interface-sampling or srl_nokia-feat:sflow-gue-packets}?
+        +--rw egress-sampling-rate?    uint32 {srl_nokia-feat:sflow-interface-sampling or srl_nokia-feat:sflow-gue-packets}?

@@ -1,11 +1,6 @@
-# OS files
-.DS_Store
-Thumbs.db
-
-# Containerlab
-*.bak
-clab-*/
-
-# IDE
-.vscode/
-.idea/
+__pycache__/
+*.pyc
+venv/
+*.cast
+clab-branch-office/
+phase-03-programmability/scripts/yang/models/
