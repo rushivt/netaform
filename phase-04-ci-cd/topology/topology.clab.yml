@@ -1,0 +1,44 @@
+name: netaform-p4
+prefix: clab
+
+topology:
+  kinds:
+    nokia_srlinux:
+      image: ghcr.io/nokia/srlinux:latest
+    linux:
+      image: wbitt/network-multitool:latest
+
+  nodes:
+    isp-rtr:
+      kind: linux
+      image: frrouting/frr:latest
+      # Binding your static configs here
+      binds:
+        - configs/isp-rtr/daemons:/etc/frr/daemons
+        - configs/isp-rtr/frr.conf:/etc/frr/frr.conf
+      
+    edge-1:
+      kind: nokia_srlinux
+      type: ixr-d2l
+    dist-1:
+      kind: nokia_srlinux
+      type: ixr-d2l
+    dist-2:
+      kind: nokia_srlinux
+      type: ixr-d2l
+
+    host-eng:
+      kind: linux
+    host-sales:
+      kind: linux
+    host-server:
+      kind: linux
+
+  links:
+    - endpoints: ["edge-1:e1-1", "isp-rtr:eth1"]
+    - endpoints: ["edge-1:e1-2", "dist-1:e1-1"]
+    - endpoints: ["edge-1:e1-3", "dist-2:e1-1"]
+    - endpoints: ["dist-1:e1-2", "dist-2:e1-2"]
+    - endpoints: ["dist-1:e1-3", "host-eng:eth1"]
+    - endpoints: ["dist-2:e1-3", "host-sales:eth1"]
+    - endpoints: ["dist-2:e1-4", "host-server:eth1"]

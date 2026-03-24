@@ -4,3 +4,7 @@ venv/
 *.cast
 clab-branch-office/
 phase-03-programmability/scripts/yang/models/
+Netaform.pdf
+# Containerlab runtime data
+clab-*/
+.stackdump
