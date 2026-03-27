@@ -63,8 +63,9 @@ jobs:
             - name: Configure cEOS devices
               run: |
                   cd phase-04-ci-cd/ceos/ansible
-                  sed -i 's/vault_password_file.*//' ansible.cfg
+                  echo "${{ secrets.VAULT_PASSWORD }}" > .vault-pass-ci
                   ansible-playbook network.yml \
+                    --vault-password-file .vault-pass-ci \
                     -e "vault_ansible_user=${{ secrets.CEOS_USER }}" \
                     -e "vault_ansible_password=${{ secrets.CEOS_PASSWORD }}"
               timeout-minutes: 5
@@ -82,8 +83,9 @@ jobs:
             - name: Run Ansible validation
               run: |
                   cd phase-04-ci-cd/ceos/ansible
-                  sed -i 's/vault_password_file.*//' ansible.cfg
+                  echo "${{ secrets.VAULT_PASSWORD }}" > .vault-pass-ci
                   ansible-playbook network.yml --tags validate \
+                    --vault-password-file .vault-pass-ci \
                     -e "vault_ansible_user=${{ secrets.CEOS_USER }}" \
                     -e "vault_ansible_password=${{ secrets.CEOS_PASSWORD }}"
 
