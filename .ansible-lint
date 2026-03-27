@@ -25,6 +25,7 @@ skip_list:
   - jinja[spacing] # Network config templates have tight formatting
   - ignore-errors # hosts.yml uses ignore_errors intentionally
   - unknown-module # arista.eos not installed on lint runner
+  - no-role-prefix # Validate role uses simple variable names
 
 # Warn but don't fail on these
 warn_list:
