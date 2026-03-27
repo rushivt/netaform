@@ -43,6 +43,12 @@ rules:
     min-spaces-inside: 0
     max-spaces-inside: 1
 
+  comments-indentation: false
+
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
+
 ignore: |
   .github/
   venv/

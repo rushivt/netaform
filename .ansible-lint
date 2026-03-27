@@ -17,14 +17,16 @@ exclude_paths:
 skip_list:
   # Network automation commonly uses raw/command/shell modules
   # because network devices don't have standard Ansible modules for everything
-  - command-instead-of-module    # We use raw module for Alpine hosts
-  - no-changed-when              # Network commands don't report change status cleanly
-  - yaml[truthy]                 # Handled by .yamllint instead
-  - name[missing]                # Some task files use short-form names
-  - risky-shell-pipe             # Bootstrap scripts use pipes intentionally
-  - jinja[spacing]               # Network config templates have tight formatting
+  - command-instead-of-module # We use raw module for Alpine hosts
+  - no-changed-when # Network commands don't report change status cleanly
+  - yaml[truthy] # Handled by .yamllint instead
+  - name[missing] # Some task files use short-form names
+  - risky-shell-pipe # Bootstrap scripts use pipes intentionally
+  - jinja[spacing] # Network config templates have tight formatting
+  - ignore-errors # hosts.yml uses ignore_errors intentionally
+  - unknown-module # arista.eos not installed on lint runner
 
 # Warn but don't fail on these
 warn_list:
   - experimental
-  - fqcn[action-core]            # Warn about non-FQCN module names
+  - fqcn[action-core] # Warn about non-FQCN module names
