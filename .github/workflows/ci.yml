@@ -63,6 +63,7 @@ jobs:
             - name: Configure cEOS devices
               run: |
                   cd phase-04-ci-cd/ceos/ansible
+                  sed -i '/vault_password_file/d' ansible.cfg
                   echo "${{ secrets.VAULT_PASSWORD }}" > .vault-pass-ci
                   ansible-playbook network.yml \
                     --vault-password-file .vault-pass-ci \
@@ -83,6 +84,7 @@ jobs:
             - name: Run Ansible validation
               run: |
                   cd phase-04-ci-cd/ceos/ansible
+                  sed -i '/vault_password_file/d' ansible.cfg
                   echo "${{ secrets.VAULT_PASSWORD }}" > .vault-pass-ci
                   ansible-playbook network.yml --tags validate \
                     --vault-password-file .vault-pass-ci \
