@@ -1,0 +1,39 @@
+name: Linting and Syntax Check
+
+on:
+  push:
+    branches: ["automation/phase-04-pipeline"]
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Tools
+        run: |
+          pip install flake8 yamllint ansible-lint
+          ansible-galaxy collection install arista.eos
+
+      - name: YAML & Topology Check
+        run: yamllint -c .yamllint .
+
+      - name: Python Script Guard
+        run: flake8 .
+
+      - name: Ansible Best Practices
+        run: ansible-lint --force-color -c .ansible-lint
+
+      - name: Secret Scan (Gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

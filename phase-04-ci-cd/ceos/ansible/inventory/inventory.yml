@@ -1,0 +1,19 @@
+---
+all:
+  children:
+    eos_devices:
+      hosts:
+        edge-1:
+          ansible_host: clab-netaform-p4-ceos-edge-1
+        dist-1:
+          ansible_host: clab-netaform-p4-ceos-dist-1
+        dist-2:
+          ansible_host: clab-netaform-p4-ceos-dist-2
+    lab_hosts:
+      hosts:
+        host-eng:
+          ansible_host: clab-netaform-p4-ceos-host-eng
+        host-sales:
+          ansible_host: clab-netaform-p4-ceos-host-sales
+        host-server:
+          ansible_host: clab-netaform-p4-ceos-host-server

@@ -8,3 +8,11 @@ Netaform.pdf
 # Containerlab runtime data
 clab-*/
 .stackdump
+.vault-pass
+*.retry
+# Phase 4 additions
+**/clab-*/
+**/__pycache__/
+*.retry
+phase-04-ci-cd/ceos/ansible/.vault-pass
+phase-04-ci-cd/srlinux/ansible/.vault-pass

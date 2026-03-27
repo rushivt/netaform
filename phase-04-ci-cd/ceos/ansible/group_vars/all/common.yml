@@ -1,0 +1,16 @@
+---
+dns_servers:
+  - 8.8.8.8
+  - 8.8.4.4
+
+ntp_servers:
+  - 0.pool.ntp.org
+  - 1.pool.ntp.org
+
+domain_name: netaform.lab
+
+banner_motd: |
+  ******************************************
+  * Netaform Branch Office - Phase 4 CI/CD *
+  * Authorized Access Only                 *
+  ******************************************

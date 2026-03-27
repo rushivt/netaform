@@ -1,0 +1,10 @@
+---
+- name: Configure branch office network devices (Arista cEOS)
+  hosts: eos_devices
+  gather_facts: false
+  roles:
+    - base
+    - interfaces
+    - routing
+    - security
+    - validate

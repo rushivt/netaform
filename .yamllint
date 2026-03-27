@@ -1,0 +1,58 @@
+---
+# Netaform YAML Lint Configuration
+# Tuned for: Containerlab topologies, Ansible playbooks/vars, SR Linux configs
+
+extends: default
+
+rules:
+  # Line length - network configs and Jinja2 templates often exceed 80 chars
+  line-length:
+    max: 160
+    allow-non-breakable-inline-mappings: true
+
+  # Truthy values - Ansible uses 'yes/no/on/off' extensively
+  # SR Linux and Containerlab also use non-standard truthy values
+  truthy:
+    allowed-values: ["true", "false", "yes", "no", "on", "off"]
+    check-keys: false
+
+  # Comments - don't enforce space after '#' (common in config files)
+  comments:
+    require-starting-space: true
+    ignore-shebangs: true
+    min-spaces-from-content: 1
+
+  # Indentation - 2 spaces standard for Ansible and Containerlab
+  indentation:
+    spaces: 2
+    indent-sequences: whatever
+
+  # Document start - don't require '---' on every YAML file
+  # Containerlab files and vars files often skip it
+  document-start: disable
+
+  # Empty lines
+  empty-lines:
+    max: 2
+
+  # Braces and brackets - relaxed for inline Ansible vars
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+
+  comments-indentation: false
+
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
+
+ignore: |
+  .github/
+  venv/
+  .venv/
+  phase-01-branch-office/
+  phase-02-ansible-automation/
+  phase-03-programmability/

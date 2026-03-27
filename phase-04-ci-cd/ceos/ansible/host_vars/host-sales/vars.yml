@@ -1,0 +1,7 @@
+---
+hostname: host-sales
+container_name: clab-netaform-p4-ceos-host-sales
+network:
+  interface: eth1
+  ip: 10.0.20.100/24
+  gateway: 10.0.20.3
