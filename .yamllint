@@ -13,7 +13,7 @@ rules:
   # Truthy values - Ansible uses 'yes/no/on/off' extensively
   # SR Linux and Containerlab also use non-standard truthy values
   truthy:
-    allowed-values: ['true', 'false', 'yes', 'no', 'on', 'off']
+    allowed-values: ["true", "false", "yes", "no", "on", "off"]
     check-keys: false
 
   # Comments - don't enforce space after '#' (common in config files)
@@ -47,4 +47,6 @@ ignore: |
   .github/
   venv/
   .venv/
-  node_modules/
+  phase-01-branch-office/
+  phase-02-ansible-automation/
+  phase-03-programmability/
