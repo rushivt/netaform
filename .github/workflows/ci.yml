@@ -63,7 +63,7 @@ jobs:
             - name: Configure cEOS devices
               run: |
                   cd phase-04-ci-cd/ceos/ansible
-                  ansible-playbook network.yml \
+                  ANSIBLE_VAULT_PASSWORD_FILE=/dev/null ansible-playbook network.yml \
                     -e "vault_ansible_user=${{ secrets.CEOS_USER }}" \
                     -e "vault_ansible_password=${{ secrets.CEOS_PASSWORD }}"
               timeout-minutes: 5
@@ -81,7 +81,7 @@ jobs:
             - name: Run Ansible validation
               run: |
                   cd phase-04-ci-cd/ceos/ansible
-                  ansible-playbook network.yml --tags validate \
+                  ANSIBLE_VAULT_PASSWORD_FILE=/dev/null ansible-playbook network.yml --tags validate \
                     -e "vault_ansible_user=${{ secrets.CEOS_USER }}" \
                     -e "vault_ansible_password=${{ secrets.CEOS_PASSWORD }}"
 
