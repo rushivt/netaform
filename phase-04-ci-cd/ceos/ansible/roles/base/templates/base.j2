@@ -1,0 +1,18 @@
+hostname {{ hostname }}
+!
+dns domain {{ domain_name }}
+!
+{% for server in dns_servers %}
+ip name-server {{ server }}
+{% endfor %}
+!
+{% for server in ntp_servers %}
+ntp server {{ server }}
+{% endfor %}
+!
+banner motd
+{{ banner_motd }}
+EOF
+!
+management api http-commands
+   no shutdown

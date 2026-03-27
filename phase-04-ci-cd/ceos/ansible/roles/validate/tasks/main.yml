@@ -1,0 +1,44 @@
+---
+- name: Check OSPF neighbors
+  arista.eos.eos_command:
+    commands:
+      - show ip ospf neighbor
+  register: ospf_result
+  tags:
+    - validate
+
+- name: Display OSPF neighbors
+  ansible.builtin.debug:
+    var: ospf_result.stdout_lines
+  tags:
+    - validate
+
+- name: Check BGP summary
+  arista.eos.eos_command:
+    commands:
+      - show ip bgp summary
+  register: bgp_result
+  when: bgp is defined
+  tags:
+    - validate
+
+- name: Display BGP summary
+  ansible.builtin.debug:
+    var: bgp_result.stdout_lines
+  when: bgp is defined
+  tags:
+    - validate
+
+- name: Check interface status
+  arista.eos.eos_command:
+    commands:
+      - show ip interface brief
+  register: intf_result
+  tags:
+    - validate
+
+- name: Display interface status
+  ansible.builtin.debug:
+    var: intf_result.stdout_lines
+  tags:
+    - validate

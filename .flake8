@@ -1,0 +1,23 @@
+[flake8]
+# Fatal errors only for CI pipeline (syntax errors, undefined names)
+# Tighten this as the codebase matures
+select = E9,F63,F7,F82
+
+# Line length matching yamllint
+max-line-length = 160
+
+# Ignore virtual environments and earlier phases' scripts
+exclude =
+    .git,
+    __pycache__,
+    venv,
+    .venv,
+    build,
+    dist
+
+# Show source code for errors
+show-source = true
+
+# Count errors
+count = true
+statistics = true

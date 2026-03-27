@@ -1,0 +1,47 @@
+name: netaform-p4-ceos
+prefix: clab
+
+topology:
+  nodes:
+    isp-rtr:
+      kind: linux
+      image: frrouting/frr:latest
+      binds:
+        - configs/isp-rtr/frr.conf:/etc/frr/frr.conf
+        - configs/isp-rtr/daemons:/etc/frr/daemons
+
+    edge-1:
+      kind: ceos
+      image: ceos:4.35.1F
+      startup-config: configs/edge-1/startup-config
+
+    dist-1:
+      kind: ceos
+      image: ceos:4.35.1F
+      startup-config: configs/dist-1/startup-config
+
+    dist-2:
+      kind: ceos
+      image: ceos:4.35.1F
+      startup-config: configs/dist-2/startup-config
+
+    host-eng:
+      kind: linux
+      image: wbitt/network-multitool:latest
+
+    host-sales:
+      kind: linux
+      image: wbitt/network-multitool:latest
+
+    host-server:
+      kind: linux
+      image: wbitt/network-multitool:latest
+
+  links:
+    - endpoints: ["isp-rtr:eth1", "edge-1:eth1"]
+    - endpoints: ["edge-1:eth2", "dist-1:eth1"]
+    - endpoints: ["edge-1:eth3", "dist-2:eth1"]
+    - endpoints: ["dist-1:eth2", "dist-2:eth2"]
+    - endpoints: ["dist-1:eth3", "host-eng:eth1"]
+    - endpoints: ["dist-2:eth3", "host-sales:eth1"]
+    - endpoints: ["dist-2:eth4", "host-server:eth1"]

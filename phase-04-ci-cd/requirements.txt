@@ -1,0 +1,6 @@
+ansible>=2.17
+napalm>=4.0
+napalm-srlinux>=0.1.0
+pytest>=8.0
+pytest-html>=4.0
+pyyaml>=6.0
