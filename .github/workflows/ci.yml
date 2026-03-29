@@ -1,143 +1,149 @@
 name: "Network CI/CD Pipeline"
 
 on:
-    pull_request:
-        branches: [main]
+  pull_request:
+    branches: [main]
+    paths:
+      - "phase-04-ci-cd/ceos/**"
+      - ".github/workflows/**"
+      - ".yamllint"
+      - ".ansible-lint"
+      - ".flake8"
 
 jobs:
-    lint:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Set up Python
-              uses: actions/setup-python@v5
-              with:
-                  python-version: "3.10"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
 
-            - name: Install lint tools
-              run: |
-                  pip install flake8 yamllint ansible-lint
-                  ansible-galaxy collection install arista.eos
+      - name: Install lint tools
+        run: |
+          pip install flake8 yamllint ansible-lint
+          ansible-galaxy collection install arista.eos
 
-            - name: YAML lint
-              run: yamllint -c .yamllint .
+      - name: YAML lint
+        run: yamllint -c .yamllint .
 
-            - name: Python lint
-              run: flake8 .
+      - name: Python lint
+        run: flake8 .
 
-            - name: Ansible lint
-              run: ansible-lint --force-color -c .ansible-lint
+      - name: Ansible lint
+        run: ansible-lint --force-color -c .ansible-lint
 
-    integration:
-        needs: lint
-        runs-on: [self-hosted, linux, ceos]
+  integration:
+    needs: lint
+    runs-on: [self-hosted, linux, ceos]
 
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Install Python dependencies
-              run: pip3 install -r phase-04-ci-cd/requirements.txt
+      - name: Install Python dependencies
+        run: pip3 install -r phase-04-ci-cd/requirements.txt
 
-            - name: Install Ansible collections
-              run: ansible-galaxy collection install arista.eos
+      - name: Install Ansible collections
+        run: ansible-galaxy collection install arista.eos
 
-            # --- Deploy topology ---
-            - name: Deploy network topology
-              run: sudo containerlab deploy -t phase-04-ci-cd/ceos/topology/topology.clab.yml --reconfigure
-              timeout-minutes: 10
+      # --- Deploy topology ---
+      - name: Deploy network topology
+        run: sudo containerlab deploy -t phase-04-ci-cd/ceos/topology/topology.clab.yml --reconfigure
+        timeout-minutes: 10
 
-            - name: Wait for devices to boot
-              run: |
-                  cd phase-04-ci-cd/ceos/ansible
-                  chmod +x bootstrap.sh
-                  ./bootstrap.sh
-              timeout-minutes: 5
-              env:
-                  CEOS_USER: ${{ secrets.CEOS_USER }}
-                  CEOS_PASSWORD: ${{ secrets.CEOS_PASSWORD }}
+      - name: Wait for devices to boot
+        run: |
+          cd phase-04-ci-cd/ceos/ansible
+          chmod +x bootstrap.sh
+          ./bootstrap.sh
+        timeout-minutes: 5
+        env:
+          CEOS_USER: ${{ secrets.CEOS_USER }}
+          CEOS_PASSWORD: ${{ secrets.CEOS_PASSWORD }}
 
-            # --- Configure network ---
-            - name: Configure cEOS devices
-              run: |
-                  cd phase-04-ci-cd/ceos/ansible
-                  sed -i '/vault_password_file/d' ansible.cfg
-                  echo "${{ secrets.VAULT_PASSWORD }}" > .vault-pass-ci
-                  ansible-playbook network.yml \
-                    --vault-password-file .vault-pass-ci \
-                    -e "vault_ansible_user=${{ secrets.CEOS_USER }}" \
-                    -e "vault_ansible_password=${{ secrets.CEOS_PASSWORD }}"
-              timeout-minutes: 5
+      # --- Configure network ---
+      - name: Configure cEOS devices
+        run: |
+          cd phase-04-ci-cd/ceos/ansible
+          sed -i '/vault_password_file/d' ansible.cfg
+          echo "${{ secrets.VAULT_PASSWORD }}" > .vault-pass-ci
+          ansible-playbook network.yml \
+            --vault-password-file .vault-pass-ci \
+            -e "vault_ansible_user=${{ secrets.CEOS_USER }}" \
+            -e "vault_ansible_password=${{ secrets.CEOS_PASSWORD }}"
+        timeout-minutes: 5
 
-            - name: Configure lab hosts
-              run: |
-                  cd phase-04-ci-cd/ceos/ansible
-                  ansible-playbook hosts.yml
-              timeout-minutes: 2
+      - name: Configure lab hosts
+        run: |
+          cd phase-04-ci-cd/ceos/ansible
+          ansible-playbook hosts.yml
+        timeout-minutes: 2
 
-            - name: Wait for protocols to converge
-              run: sleep 30
+      - name: Wait for protocols to converge
+        run: sleep 30
 
-            # --- Validate with Ansible ---
-            - name: Run Ansible validation
-              run: |
-                  cd phase-04-ci-cd/ceos/ansible
-                  sed -i '/vault_password_file/d' ansible.cfg
-                  echo "${{ secrets.VAULT_PASSWORD }}" > .vault-pass-ci
-                  ansible-playbook network.yml --tags validate \
-                    --vault-password-file .vault-pass-ci \
-                    -e "vault_ansible_user=${{ secrets.CEOS_USER }}" \
-                    -e "vault_ansible_password=${{ secrets.CEOS_PASSWORD }}"
+      # --- Validate with Ansible ---
+      - name: Run Ansible validation
+        run: |
+          cd phase-04-ci-cd/ceos/ansible
+          sed -i '/vault_password_file/d' ansible.cfg
+          echo "${{ secrets.VAULT_PASSWORD }}" > .vault-pass-ci
+          ansible-playbook network.yml --tags validate \
+            --vault-password-file .vault-pass-ci \
+            -e "vault_ansible_user=${{ secrets.CEOS_USER }}" \
+            -e "vault_ansible_password=${{ secrets.CEOS_PASSWORD }}"
 
-            # --- Run pytest suite ---
-            - name: Run network test suite
-              id: pytest
-              run: |
-                  cd phase-04-ci-cd/ceos/scripts
-                  python3 -m pytest tests/ -v --tb=short --junitxml=../test-results.xml 2>&1 | tee ../test-output.txt
-              continue-on-error: true
-              env:
-                  CEOS_USER: ${{ secrets.CEOS_USER }}
-                  CEOS_PASSWORD: ${{ secrets.CEOS_PASSWORD }}
+      # --- Run pytest suite ---
+      - name: Run network test suite
+        id: pytest
+        run: |
+          cd phase-04-ci-cd/ceos/scripts
+          python3 -m pytest tests/ -v --tb=short --junitxml=../test-results.xml 2>&1 | tee ../test-output.txt
+        continue-on-error: true
+        env:
+          CEOS_USER: ${{ secrets.CEOS_USER }}
+          CEOS_PASSWORD: ${{ secrets.CEOS_PASSWORD }}
 
-            # --- Upload test results ---
-            - name: Upload test results
-              uses: actions/upload-artifact@v4
-              if: always()
-              with:
-                  name: ceos-test-results
-                  path: |
-                      phase-04-ci-cd/ceos/test-results.xml
-                      phase-04-ci-cd/ceos/test-output.txt
+      # --- Upload test results ---
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ceos-test-results
+          path: |
+            phase-04-ci-cd/ceos/test-results.xml
+            phase-04-ci-cd/ceos/test-output.txt
 
-            # --- Post PR summary ---
-            - name: Generate test summary
-              if: always()
-              run: |
-                  echo "## cEOS Network CI/CD Test Results (Self-Hosted)" >> $GITHUB_STEP_SUMMARY
-                  echo "" >> $GITHUB_STEP_SUMMARY
-                  if [ -f phase-04-ci-cd/ceos/test-output.txt ]; then
-                    SUMMARY=$(grep -E "^(PASSED|FAILED|ERROR|=)" phase-04-ci-cd/ceos/test-output.txt | tail -1)
-                    echo "**pytest:** \`${SUMMARY}\`" >> $GITHUB_STEP_SUMMARY
-                    echo "" >> $GITHUB_STEP_SUMMARY
-                    echo "<details><summary>Full test output</summary>" >> $GITHUB_STEP_SUMMARY
-                    echo "" >> $GITHUB_STEP_SUMMARY
-                    echo '```' >> $GITHUB_STEP_SUMMARY
-                    cat phase-04-ci-cd/ceos/test-output.txt >> $GITHUB_STEP_SUMMARY
-                    echo '```' >> $GITHUB_STEP_SUMMARY
-                    echo "</details>" >> $GITHUB_STEP_SUMMARY
-                  else
-                    echo "No test output found." >> $GITHUB_STEP_SUMMARY
-                  fi
+      # --- Post PR summary ---
+      - name: Generate test summary
+        if: always()
+        run: |
+          echo "## cEOS Network CI/CD Test Results (Self-Hosted)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f phase-04-ci-cd/ceos/test-output.txt ]; then
+            SUMMARY=$(grep -E "^(PASSED|FAILED|ERROR|=)" phase-04-ci-cd/ceos/test-output.txt | tail -1)
+            echo "**pytest:** \`${SUMMARY}\`" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "<details><summary>Full test output</summary>" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat phase-04-ci-cd/ceos/test-output.txt >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "</details>" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No test output found." >> $GITHUB_STEP_SUMMARY
+          fi
 
-            # --- Teardown (always runs) ---
-            - name: Destroy topology
-              if: always()
-              run: sudo containerlab destroy -t phase-04-ci-cd/ceos/topology/topology.clab.yml || true
+      # --- Teardown (always runs) ---
+      - name: Destroy topology
+        if: always()
+        run: sudo containerlab destroy -t phase-04-ci-cd/ceos/topology/topology.clab.yml || true
 
-            # --- Fail if tests failed ---
-            - name: Check test results
-              if: steps.pytest.outcome == 'failure'
-              run: exit 1
+      # --- Fail if tests failed ---
+      - name: Check test results
+        if: steps.pytest.outcome == 'failure'
+        run: exit 1
