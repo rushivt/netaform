@@ -1,0 +1,45 @@
+{# ---------------------------------------------------------------------------
+   PURPOSE: Jinja2 template for generating Ansible remediation playbooks
+   USED BY: scripts/agent/playbook_generator.py
+   VARIABLES INJECTED BY GENERATOR:
+     - fault_type: short identifier e.g. "bgp_asn_mismatch"
+     - device: hostname e.g. "edge-1"
+     - description: human readable fault description
+     - commands: list of EOS CLI commands that fix the fault
+     - timestamp: when the playbook was generated
+   OUTCOME: A valid Ansible playbook saved to playbooks/remediation/
+--------------------------------------------------------------------------- #}
+---
+# ============================================================
+# Bantu Remediation Playbook
+# Fault     : {{ fault_type }}
+# Device    : {{ device }}
+# Generated : {{ timestamp }}
+# ============================================================
+# IMPORTANT: Review this playbook carefully before running.
+# Bantu classified this fault as HIGH severity — human approval required.
+# Run with: ansible-playbook -i <inventory> playbooks/remediation/{{ fault_type }}_{{ device }}.yml
+# ============================================================
+
+- name: "Bantu Remediation — {{ description }}"
+  hosts: {{ device }}
+  gather_facts: false
+  connection: httpapi
+
+  vars:
+    ansible_network_os: eos
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: false
+
+  tasks:
+{% for command in commands %}
+    - name: "{{ command }}"
+      arista.eos.eos_command:
+        commands:
+          - "{{ command }}"
+{% endfor %}
+
+    - name: Save running config
+      arista.eos.eos_command:
+        commands:
+          - write memory

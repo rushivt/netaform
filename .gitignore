@@ -16,3 +16,8 @@ clab-*/
 *.retry
 phase-04-ci-cd/ceos/ansible/.vault-pass
 phase-04-ci-cd/srlinux/ansible/.vault-pass
+.claude/
+# Phase 5 additions
+phase-05-ai-agent/venv/
+phase-05-ai-agent/.env
+phase-05-ai-agent/playbooks/remediation/*.yml

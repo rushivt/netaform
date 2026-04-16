@@ -1,0 +1,7 @@
+groq
+napalm
+netmiko
+pyyaml
+jinja2
+colorama
+python-dotenv

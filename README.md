@@ -14,6 +14,7 @@ A public, evolving network automation portfolio built on [Containerlab](https://
 | 2     | [Automating the Branch with Ansible](phase-02-ansible-automation/) | Ansible, Jinja2, Make          | 🟢 Complete |
 | 3     | [Network Programmability - NETCONF](phase-03-programmability/)     | Python, ncclient, pyang        | 🟢 Complete |
 | 4     | [CI/CD Pipeline - Network as Code](phase-04-ci-cd/)                | GitHub Actions, pytest, NAPALM | 🟢 Complete |
+| 5     | [AI Troubleshooting Agent - Bantu](phase-05-ai-agent/)             | Groq, NAPALM, Netmiko, Python  | 🟢 Complete |
 
 _More phases coming — follow the journey._
 
