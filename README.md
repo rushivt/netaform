@@ -8,13 +8,14 @@ A public, evolving network automation portfolio built on [Containerlab](https://
 
 ## Phases
 
-| Phase | Scenario                                                           | Key Tools                      | Status      |
-| ----- | ------------------------------------------------------------------ | ------------------------------ | ----------- |
-| 1     | [Enterprise Branch Office](phase-01-branch-office/)                | Containerlab, cEOS, FRR        | 🟢 Complete |
-| 2     | [Automating the Branch with Ansible](phase-02-ansible-automation/) | Ansible, Jinja2, Make          | 🟢 Complete |
-| 3     | [Network Programmability - NETCONF](phase-03-programmability/)     | Python, ncclient, pyang        | 🟢 Complete |
-| 4     | [CI/CD Pipeline - Network as Code](phase-04-ci-cd/)                | GitHub Actions, pytest, NAPALM | 🟢 Complete |
-| 5     | [AI Troubleshooting Agent - Bantu](phase-05-ai-agent/)             | Groq, NAPALM, Netmiko, Python  | 🟢 Complete |
+| Phase | Scenario                                                               | Key Tools                        | Status      |
+| ----- | ---------------------------------------------------------------------- | -------------------------------- | ----------- |
+| 1     | [Enterprise Branch Office](phase-01-branch-office/)                    | Containerlab, cEOS, FRR          | 🟢 Complete |
+| 2     | [Automating the Branch with Ansible](phase-02-ansible-automation/)     | Ansible, Jinja2, Make            | 🟢 Complete |
+| 3     | [Network Programmability - NETCONF](phase-03-programmability/)         | Python, ncclient, pyang          | 🟢 Complete |
+| 4     | [CI/CD Pipeline - Network as Code](phase-04-ci-cd/)                    | GitHub Actions, pytest, NAPALM   | 🟢 Complete |
+| 5     | [AI Troubleshooting Agent - Bantu](phase-05-ai-agent/)                 | Groq, NAPALM, Netmiko, Python    | 🟢 Complete |
+| 6     | [Streaming Telemetry - gNMI, Prometheus, Grafana](phase-06-telemetry/) | gNMI, gnmic, Prometheus, Grafana | 🟢 Complete |
 
 _More phases coming — follow the journey._
 

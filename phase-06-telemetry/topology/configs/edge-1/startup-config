@@ -1,0 +1,65 @@
+hostname edge-1
+!
+dns domain netaform.lab
+ip name-server 8.8.8.8
+ip name-server 8.8.4.4
+ntp server 0.pool.ntp.org
+ntp server 1.pool.ntp.org
+!
+banner motd
+******************************************
+* Netaform Branch Office - Phase 6 Telem *
+* Authorized Access Only                 *
+******************************************
+EOF
+!
+username admin privilege 15 secret admin
+aaa authorization exec default local
+!
+management api http-commands
+   no shutdown
+!
+management api gnmi
+   transport grpc default
+      port 6030
+   provider eos-native
+!
+ip routing
+!
+interface Loopback0
+   ip address 10.0.255.10/32
+!
+interface Ethernet1
+   description Link to ISP-RTR
+   no switchport
+   ip address 203.0.113.2/30
+!
+interface Ethernet2
+   description Link to DIST-1
+   no switchport
+   ip address 10.0.1.1/30
+!
+interface Ethernet3
+   description Link to DIST-2
+   no switchport
+   ip address 10.0.1.5/30
+!
+router ospf 1
+   router-id 10.0.255.10
+   network 10.0.1.0/30 area 0
+   network 10.0.1.4/30 area 0
+   network 10.0.255.10/32 area 0
+   default-information originate
+!
+router bgp 65001
+   router-id 10.0.255.10
+   neighbor 203.0.113.1 remote-as 65000
+   !
+   address-family ipv4
+      neighbor 203.0.113.1 activate
+      redistribute ospf
+!
+ip access-list MGMT-ACCESS
+   10 permit ip 172.20.20.0/24 any
+   20 permit ip 10.0.0.0/8 any
+   100 deny ip any any log

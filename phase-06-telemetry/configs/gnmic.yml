@@ -1,0 +1,49 @@
+# gnmic configuration for Netaform Phase 6
+# Subscribes to cEOS devices via gNMI and exports metrics to Prometheus
+
+username: admin
+password: admin
+insecure: true
+encoding: json_ietf
+
+targets:
+  clab-netaform-p6-edge-1:6030:
+  clab-netaform-p6-dist-1:6030:
+  clab-netaform-p6-dist-2:6030:
+
+subscriptions:
+  interface_counters:
+    paths:
+      - /interfaces/interface/state/counters
+    mode: stream
+    stream-mode: sample
+    sample-interval: 10s
+
+  interface_state:
+    paths:
+      - /interfaces/interface/state/oper-status
+      - /interfaces/interface/state/admin-status
+    mode: stream
+    stream-mode: on-change
+
+  bgp_neighbors:
+    paths:
+      - /network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state
+    mode: stream
+    stream-mode: on-change
+
+  system_resources:
+    paths:
+      - /components/component[name=CPU0]/state
+      - /system/memory/state
+    mode: stream
+    stream-mode: sample
+    sample-interval: 30s
+
+outputs:
+  prometheus_output:
+    type: prometheus
+    listen: ":9804"
+    path: /metrics
+    metric-prefix: gnmic
+    append-subscription-name: true
